@@ -1,0 +1,10 @@
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 180%;
+
+}
