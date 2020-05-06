@@ -1,0 +1,13 @@
+{
+	"eslint.enable": true,
+	"jshint.enable": false,
+	"javascript.validate.enable": true,
+	"tslint.enable": false,
+	"workbench.colorCustomizations": {},
+	"javascript.format.enable": true,
+	"editor.formatOnSave": true,
+	"eslint.alwaysShowStatus": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	}
+}
