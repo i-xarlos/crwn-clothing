@@ -5,19 +5,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid gray;
   margin: 0 7.5px 15px;
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
   padding: 10px;
   box-sizing: border-box;
   box-shadow: inset 0px 0px 0px 10px white;
-  transition: background-size 20s ease-in;
-  -webkit-transition: background-size 20s ease-in;
+  transition: all .3s ease-in-out;
+
 
   &:hover {
     cursor: pointer;
-    background-size: 120%;
+    background-size: 110%;
+
+    .content {
+      opacity: 1;
+    }
   }
 
   &.large {
