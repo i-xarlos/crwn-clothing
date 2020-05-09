@@ -20,7 +20,7 @@ export default function Header({ currentUser }) {
 				</Link>
 				{currentUser ? (
 					<div className="option" onClick={() => auth.signOut()}>
-						sign out
+						Hi!, {currentUser.displayName} / sign out
 					</div>
 				) : (
 					<Link className="option" to="/sign">

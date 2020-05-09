@@ -3,17 +3,26 @@ import FormInput from '../form-input/form-input.component';
 import './sign-in.styles.scss';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { signInWidthGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWidthGoogle } from '../../firebase/firebase.utils';
 
 export default class SignIn extends Component {
 	state = {
 		email: '',
 		password: '',
+		message: null,
 	};
 
-	handleSubmit = (e) => {
+	handleSubmit = async (e) => {
 		e.preventDefault();
-		this.setState({ email: '', password: '' });
+		const { email, password } = this.state;
+
+		try {
+			await auth.signInWithEmailAndPassword(email, password);
+			this.setState({ email: '', password: '' });
+		} catch (e) {
+			console.error(e);
+			this.setState({ message: e.message });
+		}
 	};
 
 	handleChange = (e) => {
@@ -22,7 +31,7 @@ export default class SignIn extends Component {
 	};
 
 	render() {
-		const { email, password } = this.state;
+		const { email, password, message } = this.state;
 		return (
 			<div className="sign-in">
 				<h2>I have already and account</h2>
@@ -44,6 +53,7 @@ export default class SignIn extends Component {
 						label="password"
 						required
 					/>
+					{message && <span className="message">* {message}</span>}
 					<footer className="buttons">
 						<CustomButton type="submit">Sign In </CustomButton>
 						<CustomButton
