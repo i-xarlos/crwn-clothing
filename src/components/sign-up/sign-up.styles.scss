@@ -1,0 +1,16 @@
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+
+    .title {
+        margin: 10px 0;
+    }
+
+    .message {
+        display: block;
+        margin: 0 0 40px;
+        font-size: large;
+        color: #4285f4;;
+    }
+}

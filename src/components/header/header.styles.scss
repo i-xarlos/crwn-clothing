@@ -33,6 +33,7 @@
       text-transform: uppercase;
       color: gray;
       transition: ease-in .3s color;
+      cursor: pointer;
       &:hover {
         color: orange;
       }
