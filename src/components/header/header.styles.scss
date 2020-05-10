@@ -4,6 +4,8 @@
   display: flex;
   justify-content: space-between;
   margin: 25px 0;
+  position: relative;
+  z-index: 1;
 
   .logo-container {
     height: 100%;

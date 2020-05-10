@@ -1,0 +1,2 @@
+export const TOOGLE_CART_HIDDEN = 'CART/TOOGLE_CART_HIDDEN';
+export const ADD_ITEM = 'CART/ADD_ITEM';
