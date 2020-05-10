@@ -8,8 +8,9 @@ import CartItem from '../cart-item/cart-item.component';
 import { withRouter } from 'react-router-dom';
 
 import { selectCartItems } from '../../redux/cart/cart.selectors';
+import { toogleCartHidden } from '../../redux/cart/cart.actions';
 
-function CartDropdown({ cartItems, history }) {
+function CartDropdown({ cartItems, history, dispatch }) {
 	return (
 		<div className="cart-dropdown">
 			<div className="cart-items">
@@ -22,7 +23,12 @@ function CartDropdown({ cartItems, history }) {
 				)}
 			</div>
 			{!cartItems.length || (
-				<CustomButton onClick={() => history.push('/checkout')}>
+				<CustomButton
+					onClick={() => {
+						history.push('/checkout');
+						dispatch(toogleCartHidden());
+					}}
+				>
 					Go to Checkout
 				</CustomButton>
 			)}
