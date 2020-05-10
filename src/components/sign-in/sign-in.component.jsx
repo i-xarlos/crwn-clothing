@@ -57,6 +57,7 @@ export default class SignIn extends Component {
 					<footer className="buttons">
 						<CustomButton type="submit">Sign In </CustomButton>
 						<CustomButton
+							type="button"
 							onClick={signInWidthGoogle}
 							isGoogleSignIn
 						>

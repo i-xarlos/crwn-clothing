@@ -1,15 +1,15 @@
 .menu-item {
   min-width: 30%;
-  height: 300px;
+  height: 320px;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid gray;
-  margin: 0 7.5px 15px;
+  border: 1px solid #d3d3d3;
   background-size: 100%;
   background-position: center;
-  padding: 10px;
+  padding: 20px;
+  margin: 20px;
   box-sizing: border-box;
   box-shadow: inset 0px 0px 0px 10px white;
   transition: all .3s ease-in-out;
@@ -26,14 +26,6 @@
 
   &.large {
     height: 380px;
-  }
-
-  &:first-child {
-    margin-right: 7.5px;
-  }
-
-  &:last-child {
-    margin-left: 7.5px;
   }
 
   .content {
