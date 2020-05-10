@@ -23,9 +23,14 @@ function Header({ currentUser }) {
 					Contact
 				</Link>
 				{currentUser ? (
-					<div className="option" onClick={() => auth.signOut()}>
-						Hi!, {currentUser.displayName} / sign out
-					</div>
+					<React.Fragment>
+						<div className="option">
+							Hi!, {currentUser.displayName}
+						</div>
+						<div className="option" onClick={() => auth.signOut()}>
+							sign out
+						</div>
+					</React.Fragment>
 				) : (
 					<Link className="option" to="/sign">
 						SIGN IN
