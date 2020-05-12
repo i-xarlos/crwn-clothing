@@ -7,36 +7,32 @@ import {
 } from '../../redux/cart/cart.selectors';
 
 import './checkout.styles.scss';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 function CheckoutPage({ cartItems, total }) {
 	return (
 		<div className="checkout-page">
 			<header className="checkout-header">
-				<div className="header-blocks">
+				<div className="header-block">
 					<span>Product</span>
 				</div>
-				<div className="header-blocks">
-					<span>Product</span>
-				</div>
-				<div className="header-blocks">
+				<div className="header-block">
 					<span>Description</span>
 				</div>
-				<div className="header-blocks">
+				<div className="header-block">
 					<span>Quantity</span>
 				</div>
-				<div className="header-blocks">
+				<div className="header-block">
 					<span>Price</span>
 				</div>
-				<div className="header-blocks">
+				<div className="header-block">
 					<span>Remove</span>
 				</div>
 			</header>
 
-			<main>
-				{cartItems.map((item) => (
-					<h3>{item.name}</h3>
-				))}
-			</main>
+			{cartItems.map((item) => (
+				<CheckoutItem key={item.id} cartItem={item} />
+			))}
 
 			<footer className="total">${total}</footer>
 		</div>
