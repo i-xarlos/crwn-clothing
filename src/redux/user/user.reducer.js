@@ -1,4 +1,4 @@
-import * as type from './user.types';
+import type from './user.types';
 
 const initialState = {
 	currentUser: null,

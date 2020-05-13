@@ -1,4 +1,4 @@
-import * as type from './user.types';
+import type from './user.types';
 
 export const setCurrentUser = (user) => ({
 	type: type.SET_CURRENT_USER,
