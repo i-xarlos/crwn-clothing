@@ -61,7 +61,7 @@ This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) a
 
 #### STRIPE [API](https://stripe.com)
 
-Adding pays for our app
+Added payment method our app (Stripe)
 
 - Testing credit card for stripe API ( Link: [http://stripe.com](https://stripe.com/docs/testing#cards) )
 
