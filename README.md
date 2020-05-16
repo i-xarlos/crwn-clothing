@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-# [CRW PROJECT](https://crwn-ixarlos.herokuapp.com))
+# [CRW PROJECT](https://crwn-ixarlos.herokuapp.com)
 This project was made following "Complete React Developer in 2020 (w/Redux, Hooks, GraphQL)".
 This is a small shop created width react, redux, reselect, firebase, stripe
 
