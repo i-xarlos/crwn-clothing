@@ -50,6 +50,7 @@ This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) a
 ### TIPS & INFO
 
 #### .ENV
+
 - Setting environment variable and create .env file
 
   `PORT=8000`
@@ -59,10 +60,13 @@ This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) a
   `$ export PORT=8000`
 
 #### STRIPE [API](https://stripe.com)
-- Testing credit card for stripe API ( Link: [http://tripe.com](https://stripe.com/docs/testing#cards) )
+
+- Testing credit card for stripe API ( Link: [http://stripe.com](https://stripe.com/docs/testing#cards) )
+
 - Strpe Checkout for REACT ( Link: [http://react-stripe-checkout](https://github.com/azmenak/react-stripe-checkout) )
 
 ## TOPICS
+
 The topics covered will be:
 
 - React Basics [ &#9989; ]
