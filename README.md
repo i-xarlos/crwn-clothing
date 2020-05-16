@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-# CRW PROJECT #
+# [CRW PROJECT](https://crwn-ixarlos.herokuapp.com))
 This project was made following "Complete React Developer in 2020 (w/Redux, Hooks, GraphQL)".
 This is a small shop created width react, redux, reselect, firebase, stripe
 
@@ -60,6 +60,8 @@ This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) a
   `$ export PORT=8000`
 
 #### STRIPE [API](https://stripe.com)
+
+Adding pays for our app
 
 - Testing credit card for stripe API ( Link: [http://stripe.com](https://stripe.com/docs/testing#cards) )
 
