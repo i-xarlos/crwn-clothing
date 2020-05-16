@@ -1,51 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { ReactComponent as Logo } from '../../assets/svg/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
-import './header.styles.scss';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+//import './header.styles.scss';
+import {
+	HeaderContainer,
+	LogoContainer,
+	OptionsContainer,
+	OptionLink,
+} from './header.styles';
 
 function Header({ currentUser, hidden }) {
 	return (
-		<div className="header">
-			<Link className="logo-container" to="/">
-				<Logo className="logo" />
-			</Link>
+		<HeaderContainer alt="Header">
+			<LogoContainer to="/">
+				<Logo />
+			</LogoContainer>
 
-			<div className="options">
-				<Link className="option" to="/">
-					Home
-				</Link>
-				<Link className="option" to="/shop">
-					Shop
-				</Link>
-				<Link className="option" to="/contact">
-					Contact
-				</Link>
+			<OptionsContainer alt="OpitionsContainer">
+				<OptionLink to="/">Home</OptionLink>
+				<OptionLink to="/shop">Shop</OptionLink>
+				<OptionLink to="/contact">Contact</OptionLink>
+
 				{currentUser ? (
 					<React.Fragment>
-						<div className="option">
+						<OptionLink as="div">
 							Hi!, {currentUser.displayName}
-						</div>
-						<div className="option" onClick={() => auth.signOut()}>
+						</OptionLink>
+						<OptionLink onClick={() => auth.signOut()}>
 							sign out
-						</div>
+						</OptionLink>
 					</React.Fragment>
 				) : (
-					<Link className="option" to="/sign">
-						SIGN IN
-					</Link>
+					<OptionLink to="/sign">SIGN IN</OptionLink>
 				)}
 				<CartIcon />
-			</div>
+			</OptionsContainer>
 			{hidden || <CartDropdown />}
-		</div>
+		</HeaderContainer>
 	);
 }
 

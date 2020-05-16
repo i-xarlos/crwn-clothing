@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-    margin:0 auto;
+    margin: 0 auto;
     width: 80%;
     max-width: 180%;
 
@@ -12,4 +12,5 @@ body {
 
 a {
     text-decoration: none;
+    outline: none;
 }

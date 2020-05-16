@@ -13,7 +13,7 @@ Thank for my teachers great and hard work.
 
 [@Xarlos_](https://twitter.com/Xarlos_) / [Carlos Gil Carrillo &#60;ixarlos/&#62;](https://ixarlos.com/)
 
-## INSTALLED AND DEPLOYED ON [HEROKU](https://heroku.com)
+## INSTALLED AND DEPLOYED ON [HEROKU](https://crwn-ixarlos.herokuapp.com)
 
 This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) and deployed on heroku.com
 
@@ -40,6 +40,7 @@ This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) a
   `$ git push heroku master`
 
 - This app was published
+
   [crw-ixarlos](https://crwn-ixarlos.herokuapp.com)
 
 ### TEACHERS
@@ -84,7 +85,7 @@ The topics covered will be:
 
 - Stripe API [ &#9989; ]
 
-- Styled-Components
+- [Styled-Components](https://github.com/ZhangMYihua/lesson-26) [  &#9989; ]
 
 - GraphQL
 
