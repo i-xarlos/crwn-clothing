@@ -67,6 +67,100 @@ Added payment method our app (Stripe)
 
 - Strpe Checkout for REACT ( Link: [http://react-stripe-checkout](https://github.com/azmenak/react-stripe-checkout) )
 
+#### FIREBASE
+
+- QueryReference
+
+  Represent the "currend" place in the database, this object not have the actual data.
+  Snapshot objetct is necesary to get the refe:rence data
+
+  - Document
+
+    `firestore.doc('/users/:userId')`
+
+  - Collection
+
+    `firestore.collection('/users')`
+
+- DocumentReference
+
+  - We use documentRef  obj. to perform our CRUD
+
+    `.set(), .get(), .update() and delete()`
+
+  - To add documents to our collectio we can use
+
+    `.add() // collectionRed.add({ value : prop })`
+
+  - We get the snapshotObject from referenceObject using
+
+    `.get() // documentRef.get() or collectionRef.get()`
+
+    - documentRef rerturns documentSnapshot object
+    - collecionRef returns a querySnapshot object
+
+- QuerySnapshot
+
+  We get our querySnapshot object from a collectionReference object
+
+  - Document Snapshot
+  - Collection Snapshot
+
+Example to load firebase collection
+
+  ```` js
+
+      import firebase from 'firebase/app';
+      import 'firebase/firestore';
+      import 'firebase/auth';
+
+      const firebaseConfig = {
+        apiKey: 'SOME-API-KEY',
+        authDomain: 'domain.com',
+        databaseURL: 'https://URL',
+        projectId: 'proyId',
+        storageBucket: 'crwn-db-be028.appspot.com',
+        messagingSenderId: 'number',
+        appId: 'appid',
+        measurementId: 'messureId',
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+      const firestore = firebase.firestore();
+
+      const userRef = firestore.doc(users/${userAuth.uid});
+
+      const snapShot = await userRef.get();
+
+      if (!snapShot.exists) {
+        const { displayName, email } = userAuth;
+        const userRef = firestore.doc(users/${userAuth.uid});
+
+        const snapShot = await userRef.get();
+
+
+      if (!snapShot.exists) {
+        const { displayName, email } = userAuth;
+        const createAt = new Date();
+
+        try {
+          await userRef.set({
+            displayName,
+            email,
+            createAt,
+            ...additionalData,
+          });
+        } catch (error) {
+          console.log('Error creating user', error.message);
+        }
+      }
+
+  ````
+
+
+- Securuty Rules
+
 ## TOPICS
 
 The topics covered will be:

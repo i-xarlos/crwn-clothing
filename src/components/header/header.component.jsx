@@ -33,7 +33,7 @@ function Header({ currentUser, hidden }) {
 						<OptionLink as="div">
 							Hi!, {currentUser.displayName}
 						</OptionLink>
-						<OptionLink onClick={() => auth.signOut()}>
+						<OptionLink as="div" onClick={() => auth.signOut()}>
 							sign out
 						</OptionLink>
 					</React.Fragment>
