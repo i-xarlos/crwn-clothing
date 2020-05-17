@@ -4,7 +4,7 @@ import CustomButton from '../custom-button/custom-button.component';
 export const CollectionItemContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	height: 350px;
+	height: 550px;
 	align-items: center;
 	position: relative;
 
