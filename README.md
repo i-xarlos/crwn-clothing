@@ -209,9 +209,11 @@ The topics covered will be:
 ## Redux graphic guide
 
 1. Redux basic flow
+
 ![Redux Basic](/src/assets/readme-guide/redux-v1.png "Redux basic")
 
 2. Redux Sagas flow
+
 ![Redux Sagas](/src/assets/readme-guide/redux-saga-flow.png "Redux Sagas")
 
 
