@@ -4,7 +4,7 @@ import {
 	clearItemFromCart,
 	addItem,
 	removeItem,
-} from '../../redux/cart/cart.actions';
+} from '../../state/cart/cart.actions';
 import './checkout-item.styles.scss';
 
 function CheckoutItem({
@@ -41,10 +41,10 @@ function CheckoutItem({
 	);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	doClearItemFromCart: (item) => dispatch(clearItemFromCart(item)),
-	doAddItem: (item) => dispatch(addItem(item)),
-	doRemoveItem: (item) => dispatch(removeItem(item)),
+const mapDispatchToProps = dispatch => ({
+	doClearItemFromCart: item => dispatch(clearItemFromCart(item)),
+	doAddItem: item => dispatch(addItem(item)),
+	doRemoveItem: item => dispatch(removeItem(item)),
 });
 
 export default connect(null, mapDispatchToProps)(CheckoutItem);

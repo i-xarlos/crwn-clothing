@@ -1,27 +1,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
-import CollectionPage from '../collection/collection.component';
-import {
-	firestore,
-	convertCollectionsSnapshotToMap,
-} from '../../firebase/firebase.utils';
-import { updateCollections } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStartAsync } from '../../state/shop/shop.actions';
 import { connect } from 'react-redux';
 
-class ShopPage extends React.Component {
-	unsubscribeFromSnapshot = null;
-	componentDidMount() {
-		const { doUpdateCollections } = this.props;
-		const collectionRef = firestore.collection('collections');
+import CollectionPageContainer from '../collection/collection.container';
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 
-		collectionRef.onSnapshot(async (snapshot) => {
-			const collectionMap = convertCollectionsSnapshotToMap(snapshot);
-			//console.log(collectionMap);
-			doUpdateCollections(collectionMap);
-		});
+class ShopPage extends React.Component {
+	componentDidMount() {
+		const { doFetchCollectionsStartAsync } = this.props;
+		doFetchCollectionsStartAsync();
 	}
-	componentWillUnmount() {}
+
 	render() {
 		const { match } = this.props;
 		return (
@@ -29,19 +19,19 @@ class ShopPage extends React.Component {
 				<Route
 					exact
 					path={`${match.path}`}
-					component={CollectionsOverview}
+					component={CollectionsOverviewContainer}
 				/>
 				<Route
 					path={`${match.path}/:collectionId`}
-					component={CollectionPage}
+					component={CollectionPageContainer}
 				/>
 			</div>
 		);
 	}
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	doUpdateCollections: (collectionsMap) =>
-		dispatch(updateCollections(collectionsMap)),
+const mapDispatchToProps = dispatch => ({
+	doFetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
 });
+
 export default connect(null, mapDispatchToProps)(ShopPage);

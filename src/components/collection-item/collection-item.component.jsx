@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addItem } from '../../redux/cart/cart.actions';
+import { addItem } from '../../state/cart/cart.actions';
 
 import {
 	AddButton,
@@ -27,8 +27,8 @@ function CollectionItem({ item, doAddItem }) {
 	);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	doAddItem: (item) => dispatch(addItem(item)),
+const mapDispatchToProps = dispatch => ({
+	doAddItem: item => dispatch(addItem(item)),
 });
 
 export default connect(null, mapDispatchToProps)(CollectionItem);

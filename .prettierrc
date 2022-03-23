@@ -4,7 +4,7 @@
 	"tabWidth": 4,
 	"trailingComma": "all",
 	"useTabs": true,
-	"arrowParens": "always",
+	"arrowParens": "avoid",
 	"jsxBracketSameLine": false,
 	"parser": "babel",
 	"endOfLine": "crlf"

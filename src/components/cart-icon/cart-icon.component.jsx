@@ -5,9 +5,9 @@ import {
 	ItemCountContainer,
 } from './cart-icon.styles';
 import { createStructuredSelector } from 'reselect';
-import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
+import { selectCartItemsCount } from '../../state/cart/cart.selectors';
 import { connect } from 'react-redux';
-import { toogleCartHidden } from '../../redux/cart/cart.actions.js';
+import { toogleCartHidden } from '../../state/cart/cart.actions.js';
 
 function CartIcon({ doToogleCartHidden, itemCount }) {
 	return (
@@ -22,7 +22,7 @@ const mapStateToProps = createStructuredSelector({
 	itemCount: selectCartItemsCount,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
 	doToogleCartHidden: () => dispatch(toogleCartHidden()),
 });
 

@@ -10,22 +10,22 @@ import Header from './components/header/header.component';
 import SignInPage from './pages/sign/sign-in-out.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
-import { setCurrentUser } from './redux/user/user.actions';
-import { selectCurrentUser } from './redux/user/user.selectors';
+import { setCurrentUser } from './state/user/user.actions';
+import { selectCurrentUser } from './state/user/user.selectors';
 import CheckoutPage from './pages/checkout/checkout.component';
 
 class App extends React.Component {
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
-		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+		this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 			//
 			const { doSetCurrentUser } = this.props;
 
 			if (userAuth) {
 				const userRef = await createUserProfileDocument(userAuth);
 
-				userRef.onSnapshot((snapshot) => {
+				userRef.onSnapshot(snapshot => {
 					doSetCurrentUser({
 						id: snapshot.id,
 						...snapshot.data(),
@@ -70,8 +70,8 @@ const mapStateToProps = createStructuredSelector({
 	currentUser: selectCurrentUser,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-	doSetCurrentUser: (user) => dispatch(setCurrentUser(user)),
+const mapDispatchToProps = dispatch => ({
+	doSetCurrentUser: user => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
