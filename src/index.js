@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -10,7 +9,12 @@ import { UserProvider } from './context/user.context'
 import { Provider } from 'react-redux'
 import { store, persistor } from './state/store'
 
-ReactDOM.render(
+import { createRoot } from 'react-dom/client'
+
+const container = document.getElementById('root')
+const root = createRoot(container)
+
+root.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<PersistGate persistor={persistor}>
@@ -19,8 +23,7 @@ ReactDOM.render(
 				</UserProvider>
 			</PersistGate>
 		</BrowserRouter>
-	</Provider>,
-	document.getElementById('root')
+	</Provider>
 )
 
 // If you want your app to work offline and load faster, you can change

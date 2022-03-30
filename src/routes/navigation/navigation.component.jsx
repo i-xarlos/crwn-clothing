@@ -9,6 +9,7 @@ import { signOutUser } from '../../config/firebase/firebase.utils'
 import { Outlet } from 'react-router-dom'
 
 import { selectCartHidden } from '../../state/cart/cart.selectors'
+import { UserContext } from '../../context/user.context'
 import {
   HeaderContainer,
   LogoContainer,
@@ -17,14 +18,11 @@ import {
   Container,
 } from './navigation.styles'
 
-import { UserContext } from '../../context/user.context'
-
 function Header({ hidden }) {
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext)
 
   const handleSignOut = async () => {
     await signOutUser()
-    setCurrentUser(null)
   }
 
   return (
