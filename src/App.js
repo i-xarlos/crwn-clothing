@@ -42,17 +42,15 @@ const App = ({ doSetCurrentUser, currentUser }) => {
 	}, [])
 
 	return (
-		<div className='container'>
-			<Routes>
-				<Route path='/' element={<Navigation />}>
-					<Route index element={<HomePage />} />
-					<Route path='shop' element={<ShopPage />} />
-					<Route path='checkout' element={<CheckoutPage />} />
+		<Routes>
+			<Route path='/' element={<Navigation />}>
+				<Route index element={<HomePage />} />
+				<Route path='shop' element={<ShopPage />} />
+				<Route path='checkout' element={<CheckoutPage />} />
 
-					<Route exact path='auth' element={<Authentication />} />
-				</Route>
-			</Routes>
-		</div>
+				<Route exact path='auth' element={<Authentication />} />
+			</Route>
+		</Routes>
 	)
 }
 

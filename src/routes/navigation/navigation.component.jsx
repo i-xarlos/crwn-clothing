@@ -1,25 +1,34 @@
-import React from 'react'
+import { useContext } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { ReactComponent as Logo } from '../../assets/svg/crown.svg'
-import { auth } from '../../config/firebase/firebase.utils'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
+import { signOutUser } from '../../config/firebase/firebase.utils'
 
 import { Outlet } from 'react-router-dom'
 
 import { selectCartHidden } from '../../state/cart/cart.selectors'
-import { selectCurrentUser } from '../../state/user/user.selectors'
 import {
   HeaderContainer,
   LogoContainer,
   OptionsContainer,
   OptionLink,
+  Container,
 } from './navigation.styles'
 
-function Header({ currentUser, hidden }) {
+import { UserContext } from '../../context/user.context'
+
+function Header({ hidden }) {
+  const { currentUser, setCurrentUser } = useContext(UserContext)
+
+  const handleSignOut = async () => {
+    await signOutUser()
+    setCurrentUser(null)
+  }
+
   return (
-    <>
+    <Container>
       <HeaderContainer className='navigation' alt='Header'>
         <LogoContainer to='/'>
           <Logo />
@@ -31,12 +40,12 @@ function Header({ currentUser, hidden }) {
           <OptionLink to='/contact'>Contact</OptionLink>
 
           {currentUser ? (
-            <React.Fragment>
+            <>
               <OptionLink as='div'>Hi!, {currentUser.displayName}</OptionLink>
-              <OptionLink as='div' onClick={() => auth.signOut()}>
+              <OptionLink as='div' onClick={handleSignOut}>
                 sign out
               </OptionLink>
-            </React.Fragment>
+            </>
           ) : (
             <OptionLink to='/auth'>SIGN IN</OptionLink>
           )}
@@ -45,12 +54,11 @@ function Header({ currentUser, hidden }) {
         {hidden || <CartDropdown />}
       </HeaderContainer>
       <Outlet />
-    </>
+    </Container>
   )
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
   hidden: selectCartHidden,
 })
 

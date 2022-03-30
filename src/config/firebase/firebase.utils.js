@@ -7,6 +7,7 @@ import {
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	signOut,
 } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -30,6 +31,8 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect = () =>
 	signInWithRedirect(auth, googleProvider)
 
+export const signOutUser = async () => await signOut(auth)
+
 export const createUserWithEmailAndPasswordFromAuth = async (
 	email,
 	password
@@ -38,6 +41,15 @@ export const createUserWithEmailAndPasswordFromAuth = async (
 	return await createUserWithEmailAndPassword(auth, email, password)
 }
 
+export const getSignInUserFromAuth = async user => {
+	const userDocRef = doc(db, `users`, user.uid)
+	const userSnapShot = await getDoc(userDocRef)
+
+	if (userSnapShot.exists()) {
+		return convertCollectionSnapshotToMap(userSnapShot)
+	}
+	return
+}
 export const signInWithEmailAndPasswordFromAuth = async (email, password) => {
 	if (!email || !password) return
 	return await signInWithEmailAndPassword(auth, email, password)
@@ -86,6 +98,13 @@ export const addCollectionsAndDocuments = async (
 	})
 
 	return await batch.commit()
+}
+
+export const convertCollectionSnapshotToMap = collection => {
+	if (collection?._document) {
+		return collection._document.data.value.mapValue.fields
+	}
+	return {}
 }
 
 export const convertCollectionsSnapshotToMap = collections => {

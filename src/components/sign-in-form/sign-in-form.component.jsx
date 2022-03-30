@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import FormInput from '../form-input/form-input.component'
 import './sign-in-form.styles.scss'
 import CustomButton from '../custom-button/custom-button.component'
 
-//import { getRedirectResult } from 'firebase/auth'
 import {
-  //signInWidthGoogleRedirect,
   createUserDocumentFromAuth,
   signInWithEmailAndPasswordFromAuth,
   signInWithGooglePopup,
+  getSignInUserFromAuth,
 } from '../../config/firebase/firebase.utils'
+
+import { UserContext } from '../../context/user.context'
 
 const defaultFormFields = {
   email: '',
@@ -19,13 +20,7 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const [state, setState] = useState({ ...defaultFormFields })
-
-  //useEffect(async () => {
-  //const response = await getRedirectResult(auth)
-  //if (response) {
-  //const userDocRef = await createUserDocumentFromAuth(response.user)
-  //}
-  //}, [])
+  const { setCurrentUser } = useContext(UserContext)
 
   const { email, password, message } = state
 
@@ -33,8 +28,12 @@ const SignInForm = () => {
     e.preventDefault()
 
     try {
-      await signInWithEmailAndPasswordFromAuth(email, password)
+      const { user } = await signInWithEmailAndPasswordFromAuth(email, password)
+      const dataUser = await getSignInUserFromAuth(user)
+
+      //console.log('user', user, dataUser)
       setState({ ...defaultFormFields })
+      setCurrentUser({ ...user, displayName: dataUser.displayName.stringValue })
     } catch (e) {
       let message = ''
 
@@ -57,8 +56,9 @@ const SignInForm = () => {
     try {
       const { user } = await signInWithGooglePopup()
       await createUserDocumentFromAuth(user)
+      setCurrentUser(user)
     } catch (e) {
-      console.error(e.message)
+      setState({ ...state, message: e.message })
     }
   }
 
@@ -101,15 +101,6 @@ const SignInForm = () => {
           >
             Sign In with Google
           </CustomButton>
-          {
-            //<CustomButton
-            //type='button'
-            //onClick={signInWidthGoogleRedirect}
-            //isGoogleSignInRedirect
-            //>
-            //Sign In with Google
-            //</CustomButton>
-          }
         </footer>
       </form>
     </div>
