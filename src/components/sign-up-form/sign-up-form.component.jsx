@@ -1,25 +1,30 @@
 import React, { useState } from 'react'
 import {
-  auth,
   createUserDocumentFromAuth,
+  createUserWithEmailAndPasswordFromAuth,
 } from '../../config/firebase/firebase.utils'
 
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 import './sign-up-form.styles.scss'
 
+const defaultFormFields = {
+  displayName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  message: '',
+}
+
 const SignUpForm = () => {
   const [state, setState] = useState({
-    displayName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    message: null,
+    ...defaultFormFields,
   })
+
+  const { displayName, email, password, confirmPassword, message } = state
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const { displayName, email, password, confirmPassword } = state
 
     if (password !== confirmPassword) {
       alert("password don't match")
@@ -27,21 +32,25 @@ const SignUpForm = () => {
     }
 
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPasswordFromAuth(
         email,
         password
       )
       await createUserDocumentFromAuth(user, { displayName })
 
       setState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        ...defaultFormFields,
+        message: 'User has been created',
       })
     } catch (e) {
-      console.error(e)
-      setState({ message: e.message })
+      if (e.code === 'auth/email-already-in-use') {
+        return setState({
+          ...state,
+          message: 'Cannot create user, email already in use ',
+        })
+      }
+      console.error('User creation encountered an error: ', e)
+      setState({ ...state, message: e.message })
     }
   }
 
@@ -49,8 +58,6 @@ const SignUpForm = () => {
     const { name, value } = e.target
     setState({ ...state, [name]: value })
   }
-
-  const { displayName, email, password, confirmPassword, message } = state
 
   return (
     <div className='sign-up'>

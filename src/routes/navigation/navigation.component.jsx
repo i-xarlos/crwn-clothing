@@ -38,7 +38,7 @@ function Header({ currentUser, hidden }) {
               </OptionLink>
             </React.Fragment>
           ) : (
-            <OptionLink to='/sign'>SIGN IN</OptionLink>
+            <OptionLink to='/auth'>SIGN IN</OptionLink>
           )}
           <CartIcon />
         </OptionsContainer>

@@ -5,18 +5,20 @@ import CustomButton from '../custom-button/custom-button.component'
 
 //import { getRedirectResult } from 'firebase/auth'
 import {
-  auth,
-  //createUserDocumentFromAuth,
   //signInWidthGoogleRedirect,
-  signInWidthGoogle,
+  createUserDocumentFromAuth,
+  signInWithEmailAndPasswordFromAuth,
+  signInWithGooglePopup,
 } from '../../config/firebase/firebase.utils'
 
+const defaultFormFields = {
+  email: '',
+  password: '',
+  message: '',
+}
+
 const SignInForm = () => {
-  const [state, setState] = useState({
-    email: '',
-    password: '',
-    message: null,
-  })
+  const [state, setState] = useState({ ...defaultFormFields })
 
   //useEffect(async () => {
   //const response = await getRedirectResult(auth)
@@ -25,16 +27,38 @@ const SignInForm = () => {
   //}
   //}, [])
 
+  const { email, password, message } = state
+
   const handleSubmit = async e => {
     e.preventDefault()
-    const { email, password } = state
 
     try {
-      await auth.signInWithEmailAndPassword(email, password)
-      setState({ ...state, email: '', password: '' })
+      await signInWithEmailAndPasswordFromAuth(email, password)
+      setState({ ...defaultFormFields })
     } catch (e) {
-      console.error(e)
-      setState({ ...state, message: e.message })
+      let message = ''
+
+      switch (e.code) {
+        case 'auth/wrong-password':
+          message = 'Incorrect password for email'
+          break
+        case 'auth/user-not-found':
+          message = 'No user associated with this email'
+          break
+        default:
+          message = e.message
+      }
+
+      setState({ ...state, message })
+    }
+  }
+
+  const signInWidthGoogle = async () => {
+    try {
+      const { user } = await signInWithGooglePopup()
+      await createUserDocumentFromAuth(user)
+    } catch (e) {
+      console.error(e.message)
     }
   }
 
@@ -42,8 +66,6 @@ const SignInForm = () => {
     const { value, name } = e.target
     setState({ ...state, [name]: value })
   }
-
-  const { email, password, message } = state
 
   return (
     <div className='sign-in'>
@@ -62,11 +84,14 @@ const SignInForm = () => {
         <FormInput
           name='password'
           onChange={handleChange}
+          type='password'
           value={password}
           label='password'
           required
         />
+
         {message && <span className='message'>* {message}</span>}
+
         <footer className='buttons'>
           <CustomButton type='submit'>Sign In </CustomButton>
           <CustomButton
