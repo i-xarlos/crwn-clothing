@@ -2,26 +2,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { ReactComponent as Logo } from '../../assets/svg/crown.svg'
-import { auth } from '../../firebase/firebase.utils'
-import CartIcon from '../cart-icon/cart-icon.component'
-import CartDropdown from '../cart-dropdown/cart-dropdown.component'
+import { auth } from '../../config/firebase/firebase.utils'
+import CartIcon from '../../components/cart-icon/cart-icon.component'
+import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
 
 import { Outlet } from 'react-router-dom'
 
 import { selectCartHidden } from '../../state/cart/cart.selectors'
 import { selectCurrentUser } from '../../state/user/user.selectors'
-//import './header.styles.scss';
 import {
   HeaderContainer,
   LogoContainer,
   OptionsContainer,
   OptionLink,
-} from './header.styles'
+} from './navigation.styles'
 
 function Header({ currentUser, hidden }) {
   return (
     <>
-      <HeaderContainer alt='Header'>
+      <HeaderContainer className='navigation' alt='Header'>
         <LogoContainer to='/'>
           <Logo />
         </LogoContainer>

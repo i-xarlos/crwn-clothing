@@ -1,19 +1,24 @@
-import rootReducer from './root-reducer';
-import { createStore, applyMiddleware } from 'redux';
-import { persistStore } from 'redux-persist';
+import rootReducer from './root-reducer'
+import { createStore, applyMiddleware } from 'redux'
+import { persistStore } from 'redux-persist'
 //import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import createSagaMiddleware from 'redux-saga';
+import logger from 'redux-logger'
+import createSagaMiddleware from 'redux-saga'
 
-const sgagaMiddleware = createSagaMiddleware();
+import { fetchCollectionsStart } from './shop/shop.sagas'
 
-const middlewares = [sgagaMiddleware];
+const sagaMiddleware = createSagaMiddleware()
+
+const middlewares = [sagaMiddleware]
 
 if (process.env.NODE_ENV === 'development') {
-	middlewares.push(logger);
+	middlewares.push(logger)
 }
 
-export const store = createStore(rootReducer, applyMiddleware(...middlewares));
-export const persistor = persistStore(store);
+export const store = createStore(rootReducer, applyMiddleware(...middlewares))
 
-export default { store, persistor };
+sagaMiddleware.run(fetchCollectionsStart)
+
+export const persistor = persistStore(store)
+
+export default { store, persistor }
