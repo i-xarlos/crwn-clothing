@@ -43,7 +43,5 @@ export const OptionLink = styled(Link)`
 `
 
 export const Container = styled.div`
-  margin: 0 auto;
-  width: 80%;
-  max-width: 180%;
+  padding: 20px 40px;
 `

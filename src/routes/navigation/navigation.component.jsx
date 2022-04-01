@@ -9,7 +9,10 @@ import { signOutUser } from '../../config/firebase/firebase.utils'
 import { Outlet } from 'react-router-dom'
 
 import { selectCartHidden } from '../../state/cart/cart.selectors'
+
 import { UserContext } from '../../context/user.context'
+import { CartContext } from '../../context/cart.context'
+
 import {
   HeaderContainer,
   LogoContainer,
@@ -18,8 +21,10 @@ import {
   Container,
 } from './navigation.styles'
 
-function Header({ hidden }) {
+function Header() {
   const { currentUser } = useContext(UserContext)
+  const { isCartOpen } = useContext(CartContext)
+  console.log(isCartOpen)
 
   const handleSignOut = async () => {
     await signOutUser()
@@ -49,7 +54,7 @@ function Header({ hidden }) {
           )}
           <CartIcon />
         </OptionsContainer>
-        {hidden || <CartDropdown />}
+        {isCartOpen && <CartDropdown />}
       </HeaderContainer>
       <Outlet />
     </Container>

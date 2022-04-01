@@ -1,5 +1,14 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+import {
+	getFirestore,
+	doc,
+	getDoc,
+	setDoc,
+	collection,
+	writeBatch,
+	query,
+	getDocs,
+} from 'firebase/firestore'
 import {
 	getAuth,
 	signInWithPopup,
@@ -90,18 +99,29 @@ export const createUserDocumentFromAuth = async (
 
 export const addCollectionsAndDocuments = async (
 	collectionKey,
-	objectsToAdd
+	objectsToAdd,
+	field = 'title'
 ) => {
-	const collectionRef = db.collection(collectionKey)
+	const collectionRef = collection(db, collectionKey)
 
-	const batch = db.batch()
+	const batch = writeBatch()
 
 	objectsToAdd.forEach(obj => {
-		const newDocRef = collectionRef.doc()
-		batch.set(newDocRef, obj)
+		const docRef = doc(collectionRef, obj[field].toLowerCase())
+		batch.set(docRef, obj)
 	})
 
 	return await batch.commit()
+}
+
+export const getCategoriesAndDocuments = async (
+	collectionName = 'categories'
+) => {
+	const collectionRef = collection(db, collectionName)
+	const q = query(collectionRef)
+
+	const querySnapshot = await getDocs(q)
+	return querySnapshot.docs.map(docSnapshot => docSnapshot.data())
 }
 
 export const convertCollectionSnapshotToMap = collection => {

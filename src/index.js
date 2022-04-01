@@ -1,15 +1,16 @@
-import React from 'react'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as serviceWorker from './serviceWorker'
 
-import { UserProvider } from './context/user.context'
-
 import { Provider } from 'react-redux'
 import { store, persistor } from './state/store'
 
 import { createRoot } from 'react-dom/client'
+
+import { UserProvider } from './context/user.context'
+import { ProductProvider } from './context/product.context'
+import { CartProvider } from './context/cart.context'
 
 const container = document.getElementById('root')
 const root = createRoot(container)
@@ -19,7 +20,11 @@ root.render(
 		<BrowserRouter>
 			<PersistGate persistor={persistor}>
 				<UserProvider>
-					<App />
+					<ProductProvider>
+						<CartProvider>
+							<App />
+						</CartProvider>
+					</ProductProvider>
 				</UserProvider>
 			</PersistGate>
 		</BrowserRouter>
