@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import FormInput from '../form-input/form-input.component'
 import './sign-in-form.styles.scss'
-import CustomButton from '../custom-button/custom-button.component'
+import Button from '../button/button.component'
 
 import {
   createUserDocumentFromAuth,
@@ -89,14 +89,10 @@ const SignInForm = () => {
         {message && <span className='message'>* {message}</span>}
 
         <footer className='buttons'>
-          <CustomButton type='submit'>Sign In </CustomButton>
-          <CustomButton
-            type='button'
-            onClick={signInWidthGoogle}
-            isGoogleSignIn
-          >
+          <Button type='submit'>Sign In </Button>
+          <Button type='button' onClick={signInWidthGoogle} isGoogleSignIn>
             Sign In with Google
-          </CustomButton>
+          </Button>
         </footer>
       </form>
     </div>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { createUserWithEmailAndPasswordFromAuth } from '../../config/firebase/firebase.utils'
 
 import FormInput from '../form-input/form-input.component'
-import CustomButton from '../custom-button/custom-button.component'
+import Button from '../button/button.component'
 import './sign-up-form.styles.scss'
 
 const defaultFormFields = {
@@ -92,7 +92,7 @@ const SignUpForm = () => {
           required
         />
         {message && <span className='message'>* {message}</span>}
-        <CustomButton type='submit'>Sign up</CustomButton>
+        <Button type='submit'>Sign up</Button>
       </form>
     </div>
   )

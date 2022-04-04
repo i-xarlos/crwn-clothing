@@ -11,7 +11,7 @@ import { toogleCartHidden } from '../../state/cart/cart.actions.js'
 import { CartContext } from '../../context/cart.context'
 
 function CartIcon() {
-  const { setIsCartOpen, isCartOpen } = useContext(CartContext)
+  const { setIsCartOpen, isCartOpen, total } = useContext(CartContext)
 
   const toogleCartOpen = () => {
     setIsCartOpen(!isCartOpen)
@@ -19,7 +19,7 @@ function CartIcon() {
   return (
     <CartContainer alt='CartIcon' onClick={toogleCartOpen}>
       <ShoppingIcon />
-      <ItemCountContainer>{10}</ItemCountContainer>
+      <ItemCountContainer>{total}</ItemCountContainer>
     </CartContainer>
   )
 }

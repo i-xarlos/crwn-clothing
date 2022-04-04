@@ -1,6 +1,6 @@
 .menu-item {
   min-width: 30%;
-  height: 320px;
+  height: 40vh;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -12,8 +12,7 @@
   margin: 5px;
   box-sizing: border-box;
   box-shadow: inset 0px 0px 0px 10px white;
-  transition: all .3s ease-in-out;
-
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     cursor: pointer;
@@ -37,7 +36,7 @@
     justify-content: center;
     border: 1px solid black;
     background-color: white;
-    opacity: .7;
+    opacity: 0.7;
     text-transform: uppercase;
 
     .title {
@@ -50,7 +49,6 @@
     .subtitle {
       font-weight: lighter;
       font-size: 16px;
-
     }
   }
 }
