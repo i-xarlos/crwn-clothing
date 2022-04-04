@@ -9,7 +9,7 @@ import { store, persistor } from './state/store'
 import { createRoot } from 'react-dom/client'
 
 import { UserProvider } from './context/user.context'
-import { ProductProvider } from './context/product.context'
+import { CategoryProvider } from './context/category.context'
 import { CartProvider } from './context/cart.context'
 
 const container = document.getElementById('root')
@@ -20,11 +20,11 @@ root.render(
 		<BrowserRouter>
 			<PersistGate persistor={persistor}>
 				<UserProvider>
-					<ProductProvider>
+					<CategoryProvider>
 						<CartProvider>
 							<App />
 						</CartProvider>
-					</ProductProvider>
+					</CategoryProvider>
 				</UserProvider>
 			</PersistGate>
 		</BrowserRouter>

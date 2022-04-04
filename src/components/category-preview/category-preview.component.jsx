@@ -1,21 +1,18 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useContext } from 'react'
 import CollectionPreview from '../collection-preview/collection-preview.component'
-import { selectCollectionsForPreview } from '../../state/shop/shop.selector'
 
 import './category-preview.styles.scss'
+import { CategoryContext } from '../../context/category.context'
 
-function CategoryPreview({ collections }) {
+function CategoryPreview() {
+  const { categoriesMap } = useContext(CategoryContext)
+
   return (
     <div className='collections-overview'>
-      {collections.map(({ ...otherProps }, id) => (
-        <CollectionPreview key={id} {...otherProps} />
+      {Object.keys(categoriesMap).map((key, id) => (
+        <CollectionPreview key={id} items={categoriesMap[key]} title={key} />
       ))}
     </div>
   )
 }
-const mapStatetoProps = createStructuredSelector({
-  collections: selectCollectionsForPreview,
-})
-export default connect(mapStatetoProps)(CategoryPreview)
+export default CategoryPreview
