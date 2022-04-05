@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { connect } from 'react-redux'
 
 import {
   CollectionItemContainer,
