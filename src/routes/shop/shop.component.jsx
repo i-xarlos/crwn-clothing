@@ -10,7 +10,7 @@ const ShopPage = props => {
   useEffect(() => {
     const { doFetchCollectionsStart } = props
     doFetchCollectionsStart()
-  }, [])
+  }, [props])
 
   return (
     <Routes className='shop-page'>
