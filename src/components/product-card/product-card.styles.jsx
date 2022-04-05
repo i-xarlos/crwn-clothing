@@ -15,7 +15,11 @@ export const CollectionItemContainer = styled.div`
 
   ${BaseButton}, ${GoogleSignInStyles}, ${GoogleSignInStylesRedirect}, ${InvertedButtonStyles} {
     position: absolute;
+<<<<<<< HEAD
     top: calc(100% - 110px);
+=======
+    top: calc(100% - 107px);
+>>>>>>> 66252ffb25dd2d3843ed73bcda6a10e873e9b41b
     width: 90%;
     z-index: 10;
     opacity: 0.7;

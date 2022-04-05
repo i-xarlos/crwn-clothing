@@ -1,4 +1,3 @@
-import React from 'react'
 import { Group, Input, FormInputLabel } from './form-input.styles'
 
 const FormInput = ({ label, ...otherProps }) => {
