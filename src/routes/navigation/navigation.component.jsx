@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { ReactComponent as Logo } from '../../assets/svg/crown.svg'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
 import { signOutUser } from '../../config/firebase/firebase.utils'
 
 import { Outlet } from 'react-router-dom'
+import Logo from '../../assets/images/logo.gif'
 
 import { selectCartHidden } from '../../state/cart/cart.selectors'
 
@@ -34,7 +34,7 @@ function Header() {
     <Container>
       <HeaderContainer className='navigation' alt='Header'>
         <LogoContainer to='/'>
-          <Logo />
+          <img src={Logo} alt='Ixarlos / store' /> [ STORE ]
         </LogoContainer>
 
         <OptionsContainer alt='OpitionsContainer'>

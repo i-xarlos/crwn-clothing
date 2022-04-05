@@ -1,5 +1,10 @@
 import styled from 'styled-components'
-import Button from '../button/button.component'
+import {
+  BaseButton,
+  GoogleSignInStyles,
+  GoogleSignInStylesRedirect,
+  InvertedButtonStyles,
+} from '../button/button.styles'
 
 export const CollectionItemContainer = styled.div`
   display: flex;
@@ -8,24 +13,24 @@ export const CollectionItemContainer = styled.div`
   align-items: center;
   position: relative;
 
+  ${BaseButton}, ${GoogleSignInStyles}, ${GoogleSignInStylesRedirect}, ${InvertedButtonStyles} {
+    position: absolute;
+    top: calc(100% - 107px);
+    width: 90%;
+    z-index: 10;
+    opacity: 0.7;
+    display: none;
+  }
   &:hover {
     .image {
       opacity: 0.8;
     }
-    button {
+
+    ${BaseButton}, ${GoogleSignInStyles}, ${GoogleSignInStylesRedirect}, ${InvertedButtonStyles} {
       opacity: 0.85;
       display: flex;
     }
   }
-`
-
-export const AddButton = styled(Button)`
-  position: absolute;
-  top: calc(100% - 107px);
-  width: 90%;
-  z-index: 10;
-  opacity: 0.7;
-  display: none;
 `
 
 export const BackgroundImage = styled.div`

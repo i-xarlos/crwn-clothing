@@ -1,9 +1,7 @@
 import { useContext } from 'react'
 import { connect } from 'react-redux'
-//import { addItem } from '../../state/cart/cart.actions'
 
 import {
-  AddButton,
   CollectionItemContainer,
   CollectionFooterContainer,
   BackgroundImage,
@@ -11,8 +9,8 @@ import {
   PriceContainer,
 } from './product-card.styles'
 import { CartContext } from '../../context/cart.context'
+import Button, { BUTTON_TYPE_CLASES } from '../button/button.component'
 
-//function CollectionItem({ item, doAddItem }) {
 function CollectionItem({ item }) {
   const { name, price, imageUrl } = item
   const { addItemToCard } = useContext(CartContext)
@@ -23,15 +21,14 @@ function CollectionItem({ item }) {
         <NameContainer className='name'>{name}</NameContainer>
         <PriceContainer className='price'>${price}</PriceContainer>
       </CollectionFooterContainer>
-      <AddButton onClick={() => addItemToCard(item)} isInverted>
+      <Button
+        buttonType={BUTTON_TYPE_CLASES.inverted}
+        onClick={() => addItemToCard(item)}
+      >
         Add to cart
-      </AddButton>
+      </Button>
     </CollectionItemContainer>
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  //doAddItem: item => dispatch(addItem(item)),
-})
-
-export default connect(null, mapDispatchToProps)(CollectionItem)
+export default CollectionItem

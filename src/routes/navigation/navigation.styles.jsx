@@ -13,13 +13,17 @@ export const HeaderContainer = styled.div`
 
 export const LogoContainer = styled(Link)`
   height: 100%;
-  width: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: ease-in-out 0.2s filter;
+  color: #666;
+  font-size: 0.8rem;
   &:hover {
-    filter: brightness(150%);
+    filter: brightness(200%);
+  }
+  img {
+    margin-right: 1rem;
   }
 `
 
