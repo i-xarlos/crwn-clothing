@@ -34,7 +34,7 @@ function Header() {
     <Container>
       <HeaderContainer className='navigation' alt='Header'>
         <LogoContainer to='/'>
-          <img src={Logo} alt='Ixarlos / store' /> [ STORE ]
+          <img src={Logo} alt='Ixarlos / store' /> <span>[ STORE ]</span>
         </LogoContainer>
 
         <OptionsContainer alt='OpitionsContainer'>

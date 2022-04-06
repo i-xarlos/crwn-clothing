@@ -17,13 +17,16 @@ export const LogoContainer = styled(Link)`
   justify-content: center;
   align-items: center;
   transition: ease-in-out 0.2s filter;
-  color: #666;
-  font-size: 0.8rem;
   &:hover {
     filter: brightness(200%);
   }
   img {
     margin-right: 1rem;
+  }
+  span {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
   }
 `
 
