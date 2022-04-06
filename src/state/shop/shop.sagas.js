@@ -1,6 +1,6 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import ShopActionsTypes from './shop.types'
-import { getCollectionAndDocuments } from '../../config/firebase/firebase.utils'
+import { getCategoriesAndDocuments } from '../../config/firebase/firebase.utils'
 import {
 	fetchCollectionsSuccess,
 	fetchCollectionsFailure,
@@ -8,7 +8,7 @@ import {
 
 export function* fetchCollectionsAsync() {
 	try {
-		const collectionArray = yield getCollectionAndDocuments('categories')
+		const collectionArray = yield getCategoriesAndDocuments()
 
 		yield put(fetchCollectionsSuccess(collectionArray))
 	} catch (e) {

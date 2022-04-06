@@ -1,17 +1,10 @@
-import { useContext } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector } from 'react-redux'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
 import { signOutUser } from '../../config/firebase/firebase.utils'
 
 import { Outlet } from 'react-router-dom'
 import Logo from '../../assets/images/logo.gif'
-
-import { selectCartHidden } from '../../state/cart/cart.selectors'
-
-import { UserContext } from '../../context/user.context'
-import { CartContext } from '../../context/cart.context'
 
 import {
   HeaderContainer,
@@ -21,10 +14,11 @@ import {
   Container,
 } from './navigation.styles'
 
-function Header() {
-  const { currentUser } = useContext(UserContext)
-  const { isCartOpen } = useContext(CartContext)
-  console.log(isCartOpen)
+function Navigation() {
+  const {
+    user: { currentUser },
+    cart: { hidden },
+  } = useSelector(state => state)
 
   const handleSignOut = async () => {
     await signOutUser()
@@ -54,15 +48,11 @@ function Header() {
           )}
           <CartIcon />
         </OptionsContainer>
-        {isCartOpen && <CartDropdown />}
+        {hidden && <CartDropdown />}
       </HeaderContainer>
       <Outlet />
     </Container>
   )
 }
 
-const mapStateToProps = createStructuredSelector({
-  hidden: selectCartHidden,
-})
-
-export default connect(mapStateToProps)(Header)
+export default Navigation

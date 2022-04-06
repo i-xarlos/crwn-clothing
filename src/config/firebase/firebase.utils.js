@@ -19,7 +19,7 @@ import {
 	signOut,
 	onAuthStateChanged,
 } from 'firebase/auth'
-
+//hola
 const firebaseConfig = {
 	apiKey: 'AIzaSyBe7AsLIBa9MLBXJMinsxTFBMMpl71alSA',
 	authDomain: 'crwn-db-be028.firebaseapp.com',

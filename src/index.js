@@ -8,26 +8,30 @@ import { store, persistor } from './state/store'
 
 import { createRoot } from 'react-dom/client'
 
-import { UserProvider } from './context/user.context'
-import { CategoryProvider } from './context/category.context'
-import { CartProvider } from './context/cart.context'
+//import { UserProvider } from './context/user.context'
+//import { CartProvider } from './context/cart.context'
+//import { CategoryProvider } from './context/category.context'
 
 const container = document.getElementById('root')
 const root = createRoot(container)
 
 root.render(
 	<Provider store={store}>
-		<BrowserRouter>
-			<PersistGate persistor={persistor}>
-				<UserProvider>
-					<CategoryProvider>
-						<CartProvider>
-							<App />
-						</CartProvider>
-					</CategoryProvider>
-				</UserProvider>
-			</PersistGate>
-		</BrowserRouter>
+		<PersistGate persistor={persistor}>
+			<BrowserRouter>
+				{
+					//<UserProvider>
+					//<CartProvider>
+					//<CategoryProvider>
+				}
+				<App />
+				{
+					//</CategoryProvider>
+					//<UserProvider/>
+					//</CartProvider>
+				}
+			</BrowserRouter>
+		</PersistGate>
 	</Provider>
 )
 
