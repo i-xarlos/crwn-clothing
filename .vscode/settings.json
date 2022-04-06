@@ -1,6 +1,6 @@
 {
   "editor.fontSize": 14,
-  "editor.fontFamily": "Operator Mono Lig, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Cascadia Code, Fira Code",
   "editor.fontLigatures": true,
   "eslint.enable": true,
   "jshint.enable": false,
