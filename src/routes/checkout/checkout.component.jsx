@@ -1,6 +1,3 @@
-import { useContext } from 'react'
-
-import './checkout.styles.scss'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
 import { useSelector } from 'react-redux'
@@ -8,6 +5,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from '../../state/cart/cart.selectors'
+import './checkout.styles.scss'
 
 function CheckoutPage() {
   const cartItems = useSelector(selectCartItems)
