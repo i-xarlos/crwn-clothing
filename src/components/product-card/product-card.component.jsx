@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-
 import {
   CollectionItemContainer,
   CollectionFooterContainer,
@@ -7,14 +5,12 @@ import {
   NameContainer,
   PriceContainer,
 } from './product-card.styles'
-//import { CartContext } from '../../context/cart.context'
 import Button, { BUTTON_TYPE_CLASES } from '../button/button.component'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../../state/cart/cart.actions'
 
 function CollectionItem({ item }) {
   const { name, price, imageUrl } = item
-  //const { addItemToCard } = useContext(CartContext)
   const dispatch = useDispatch()
   return (
     <CollectionItemContainer alt='CollectionItem'>

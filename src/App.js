@@ -15,7 +15,6 @@ import {
 } from './config/firebase/firebase.utils'
 import { setCurrentUser } from './state/user/user.actions'
 import { useDispatch } from 'react-redux'
-import { fetchCollectionsStart } from './state/shop/shop.actions'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -29,7 +28,6 @@ const App = () => {
 			}
 			dispatch(setCurrentUser(user))
 		})
-		dispatch(fetchCollectionsStart())
 		return unsubscribeFromAuth
 	}, [dispatch])
 

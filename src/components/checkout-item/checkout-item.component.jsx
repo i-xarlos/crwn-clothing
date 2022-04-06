@@ -1,6 +1,4 @@
-import { useContext } from 'react'
 import { useDispatch } from 'react-redux'
-import { CartContext } from '../../context/cart.context'
 import {
   addItem,
   clearItemFromCart,

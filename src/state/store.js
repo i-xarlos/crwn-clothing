@@ -23,4 +23,6 @@ sagaMiddleware.run(fetchCollectionsStart)
 
 export const persistor = persistStore(store)
 
-export default { store, persistor }
+const state = { store, persistor }
+
+export default state
