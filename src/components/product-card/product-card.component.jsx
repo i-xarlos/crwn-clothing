@@ -7,12 +7,15 @@ import {
   NameContainer,
   PriceContainer,
 } from './product-card.styles'
-import { CartContext } from '../../context/cart.context'
+//import { CartContext } from '../../context/cart.context'
 import Button, { BUTTON_TYPE_CLASES } from '../button/button.component'
+import { useDispatch } from 'react-redux'
+import { addItem } from '../../state/cart/cart.actions'
 
 function CollectionItem({ item }) {
   const { name, price, imageUrl } = item
-  const { addItemToCard } = useContext(CartContext)
+  //const { addItemToCard } = useContext(CartContext)
+  const dispatch = useDispatch()
   return (
     <CollectionItemContainer alt='CollectionItem'>
       <BackgroundImage imageUrl={imageUrl}></BackgroundImage>
@@ -22,7 +25,7 @@ function CollectionItem({ item }) {
       </CollectionFooterContainer>
       <Button
         buttonType={BUTTON_TYPE_CLASES.inverted}
-        onClick={() => addItemToCard(item)}
+        onClick={() => dispatch(addItem(item))}
       >
         Add to cart
       </Button>

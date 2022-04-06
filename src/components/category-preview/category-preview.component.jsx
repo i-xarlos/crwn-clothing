@@ -1,11 +1,11 @@
-import { useContext } from 'react'
+import { useSelector } from 'react-redux'
+import { selectCollections } from '../../state/shop/shop.selector'
 import CollectionPreview from '../collection-preview/collection-preview.component'
 
 import './category-preview.styles.scss'
-import { CategoryContext } from '../../context/category.context'
 
 function CategoryPreview() {
-  const { categoriesMap } = useContext(CategoryContext)
+  const categoriesMap = useSelector(selectCollections)
 
   return (
     <div className='collections-overview'>

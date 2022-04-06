@@ -1,16 +1,17 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { fetchCollectionsStart } from '../../state/shop/shop.actions'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import Category from '../categories/categories.component'
 import CategoryPreview from '../../components/category-preview/category-preview.container'
 
-const ShopPage = props => {
+const ShopPage = () => {
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const { doFetchCollectionsStart } = props
-    doFetchCollectionsStart()
-  }, [props])
+    dispatch(fetchCollectionsStart())
+  }, [dispatch])
 
   return (
     <Routes className='shop-page'>
@@ -20,8 +21,4 @@ const ShopPage = props => {
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  doFetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
-})
-
-export default connect(null, mapDispatchToProps)(ShopPage)
+export default ShopPage

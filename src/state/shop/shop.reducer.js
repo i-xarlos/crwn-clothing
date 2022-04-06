@@ -2,7 +2,7 @@
 import type from './shop.types'
 
 const initialState = {
-	collections: [],
+	collections: {},
 	isFetching: false,
 	errorMessage: undefined,
 }
