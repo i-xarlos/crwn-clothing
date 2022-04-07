@@ -208,13 +208,19 @@ The topics covered will be:
 
 ## Redux graphic guide
 
-1. Redux basic flow
+1. Redux Store
 
-![Redux Basic](/src/assets/readme-guide/redux-v1.png "Redux basic")
+![Redux Store](/src/assets/readme-guide/redux-dispatch.gif "Redux Store")
 
-2. Redux Sagas flow
+2. Redux Middleware
+
+![Redux Sagas](/src/assets/readme-guide/redux-middleware.png "Redux Sagas")
+
+3. Redux Sagas flow
 
 ![Redux Sagas](/src/assets/readme-guide/redux-saga-flow.png "Redux Sagas")
+
+
 
 
 

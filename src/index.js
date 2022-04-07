@@ -4,32 +4,18 @@ import { PersistGate } from 'redux-persist/integration/react'
 import * as serviceWorker from './serviceWorker'
 
 import { Provider } from 'react-redux'
-import { store, persistor } from './state/store'
+import { store, persistor } from './store/store'
 
 import { createRoot } from 'react-dom/client'
-
-//import { UserProvider } from './context/user.context'
-//import { CartProvider } from './context/cart.context'
-//import { CategoryProvider } from './context/category.context'
 
 const container = document.getElementById('root')
 const root = createRoot(container)
 
 root.render(
 	<Provider store={store}>
-		<PersistGate persistor={persistor}>
+		<PersistGate persistor={persistor} loading={null}>
 			<BrowserRouter>
-				{
-					//<UserProvider>
-					//<CartProvider>
-					//<CategoryProvider>
-				}
 				<App />
-				{
-					//</CategoryProvider>
-					//<UserProvider/>
-					//</CartProvider>
-				}
 			</BrowserRouter>
 		</PersistGate>
 	</Provider>

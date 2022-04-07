@@ -3,7 +3,7 @@ import {
   addItem,
   clearItemFromCart,
   removeItem,
-} from '../../state/cart/cart.actions'
+} from '../../store/cart/cart.actions'
 import './checkout-item.styles.scss'
 
 function CheckoutItem({ cartItem }) {

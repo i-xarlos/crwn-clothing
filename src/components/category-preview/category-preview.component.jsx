@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { selectCollectionsForPreview } from '../../state/product/product.selector'
+import { selectCollectionsForPreview } from '../../store/product/product.selector'
 import CollectionPreview from '../collection-preview/collection-preview.component'
 
 import './category-preview.styles.scss'

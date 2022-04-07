@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import MenuItem from '../menu-item/menu-item.component'
-import { selectCategories } from '../../state/category/category.selectors'
+import { selectCategories } from '../../store/category/category.selectors'
 //hola
 import './home-categories.styles.scss'
 
