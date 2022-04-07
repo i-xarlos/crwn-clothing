@@ -1,8 +1,8 @@
 // import SHOP_DATA from './shop.data';
-import type from './shop.types'
+import type from './product.types'
 
 const initialState = {
-	collections: {},
+	collections: [],
 	isFetching: false,
 	errorMessage: undefined,
 }

@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux'
-import { selectCollections } from '../../state/shop/shop.selector'
+import { selectCollectionsForPreview } from '../../state/product/product.selector'
 import CollectionPreview from '../collection-preview/collection-preview.component'
 
 import './category-preview.styles.scss'
 
 function CategoryPreview() {
-  const categoriesMap = useSelector(selectCollections)
+  const categories = useSelector(selectCollectionsForPreview)
 
   return (
     <div className='collections-overview'>
-      {Object.keys(categoriesMap).map((key, id) => (
-        <CollectionPreview key={id} items={categoriesMap[key]} title={key} />
+      {categories.map(({ items, title }, id) => (
+        <CollectionPreview key={title} items={items} title={title} />
       ))}
     </div>
   )

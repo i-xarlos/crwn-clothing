@@ -1,4 +1,4 @@
-import type from './shop.types'
+import type from './product.types'
 
 export const fetchCollectionsStart = () => ({
 	type: type.FETCH_COLLECTION_START,
