@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { fetchCollectionsStart } from '../../state/product/product.actions'
 import { useDispatch } from 'react-redux'
 
-import Category from '../categories/categories.component'
+import Category from '../category/category.component'
 import CategoryPreview from '../../components/category-preview/category-preview.container'
 
 const ShopPage = () => {
