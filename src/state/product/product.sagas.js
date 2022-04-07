@@ -1,6 +1,6 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import ShopActionsTypes from './product.types'
-import { getCollectionAndDocuments } from '../../config/firebase/firebase.utils'
+import { getCollectionAndDocuments } from '../../utils/firebase/firebase.utils'
 import {
 	fetchCollectionsSuccess,
 	fetchCollectionsFailure,
