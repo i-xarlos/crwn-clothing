@@ -7,7 +7,7 @@ import {
 } from './product-card.styles'
 import Button, { BUTTON_TYPE_CLASES } from '../button/button.component'
 import { useDispatch } from 'react-redux'
-import { addItem } from '../../state/cart/cart.actions'
+import { addItem } from '../../store/cart/cart.actions'
 
 function CollectionItem({ item }) {
   const { name, price, imageUrl } = item

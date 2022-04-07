@@ -12,7 +12,7 @@ import {
 	getSignInUserFromAuth,
 	onAuthStateChangedListener,
 } from './utils/firebase/firebase.utils'
-import { setCurrentUser } from './state/user/user.actions'
+import { setCurrentUser } from './store/user/user.actions'
 import { useDispatch } from 'react-redux'
 
 import './App.css'

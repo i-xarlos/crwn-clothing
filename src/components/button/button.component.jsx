@@ -23,6 +23,8 @@ const getButton = (buttonType = BUTTON_TYPE_CLASES.base) =>
 
 const Button = ({ children, buttonType, ...props }) => {
   const CustomButton = getButton(buttonType)
+  //const ele = { al: 'al', rel: 'lola' }['rel']
+  //console.log('CustomButton', ele)
   return (
     <CustomButton alt='CustomButton' {...props}>
       {children}

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { fetchCollectionsStart } from '../../state/product/product.actions'
+import { fetchCollectionsStart } from '../../store/product/product.actions'
 import { useDispatch } from 'react-redux'
 
 import Category from '../category/category.component'
