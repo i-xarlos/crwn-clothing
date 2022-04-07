@@ -1,9 +1,9 @@
 import rootReducer from './root-reducer'
 import { compose, createStore, applyMiddleware } from 'redux'
 import { persistStore } from 'redux-persist'
-//import thunk from 'redux-thunk';
+//import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
-import LoggerMiddleware from '../utils/middleware/logger'
+import LoggerMiddleware from '../utils/middleware/logger.middleware'
 
 import { fetchCollectionsStart } from './product/product.sagas'
 
