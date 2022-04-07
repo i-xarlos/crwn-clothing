@@ -2,7 +2,6 @@ import rootReducer from './root-reducer'
 import { compose, createStore, applyMiddleware } from 'redux'
 
 import { persistStore } from 'redux-persist'
-
 import createSagaMiddleware from 'redux-saga'
 import { rootSaga } from './root-saga'
 
