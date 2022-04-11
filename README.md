@@ -216,11 +216,17 @@ The topics covered will be:
 
 ![Redux Sagas](/src/assets/readme-guide/redux-middleware.png "Redux Sagas")
 
-3. Redux Sagas flow
+3. Redux Sagas
 
 ![Redux Sagas](/src/assets/readme-guide/redux-saga-flow.png "Redux Sagas")
 
+4. Redux Sagas Flow
 
+    - First go to the middlewares and reducers
+    - Return to sagas and apply the changes
+
+
+![Redux Sagas Flow](/src/assets/readme-guide/Redux-Saga.png "Redux Sagas Flow")
 
 
 

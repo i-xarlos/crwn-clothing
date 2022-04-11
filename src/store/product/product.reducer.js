@@ -1,30 +1,31 @@
-// import SHOP_DATA from './shop.data';
-import type from './product.types'
+import types from './product.types'
 
 const initialState = {
 	collections: [],
-	isFetching: false,
+	isLoading: false,
 	errorMessage: undefined,
 }
 
 const shopReducer = (state = initialState, action) => {
-	switch (action.type) {
-		case type.FETCH_COLLECTION_START:
+	const { type, payload } = action
+
+	switch (type) {
+		case types.FETCH_COLLECTION_START:
 			return {
 				...state,
-				isFetching: true,
+				isLoading: true,
 			}
-		case type.FETCH_COLLECTION_SUCCESS:
+		case types.FETCH_COLLECTION_SUCCESS:
 			return {
 				...state,
-				isFetching: false,
-				collections: action.payload,
+				isLoading: false,
+				collections: payload,
 			}
-		case type.FETCH_COLLECTION_FAILURE:
+		case types.FETCH_COLLECTION_FAILURE:
 			return {
 				...state,
-				isFetching: false,
-				errorMessage: action.payload,
+				isLoading: false,
+				errorMessage: payload,
 			}
 		default:
 			return state

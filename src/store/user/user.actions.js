@@ -1,6 +1,10 @@
-import type from './user.types';
+import type from './user.types'
 
-export const setCurrentUser = (user) => ({
+export const fetchCurrentUser = () => ({
+	type: type.FETCH_CURRENT_USER,
+})
+
+export const setCurrentUser = user => ({
 	type: type.SET_CURRENT_USER,
 	payload: user,
-});
+})

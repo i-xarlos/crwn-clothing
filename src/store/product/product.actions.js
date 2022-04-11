@@ -4,9 +4,9 @@ export const fetchCollectionsStart = () => ({
 	type: type.FETCH_COLLECTION_START,
 })
 
-export const fetchCollectionsSuccess = collectionMap => ({
+export const fetchCollectionsSuccess = collection => ({
 	type: type.FETCH_COLLECTION_SUCCESS,
-	payload: collectionMap,
+	payload: collection,
 })
 
 export const fetchCollectionsFailure = errorMessage => ({

@@ -9,7 +9,8 @@ import productReducer from './product/product.reducer'
 const persistconfig = {
 	key: 'root',
 	storage,
-	blacklist: ['user'], // because user is storage outsitde
+	whitelist: ['cart'], // only persist
+	//blacklist: ['user'], // not persist
 }
 
 const rootReducer = combineReducers({

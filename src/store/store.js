@@ -2,10 +2,11 @@ import rootReducer from './root-reducer'
 import { compose, createStore, applyMiddleware } from 'redux'
 
 import { persistStore } from 'redux-persist'
-import createSagaMiddleware from 'redux-saga'
-import LoggerMiddleware from '../utils/middleware/logger.middleware'
 
-import { fetchCollectionsStart } from './product/product.sagas'
+import createSagaMiddleware from 'redux-saga'
+import { rootSaga } from './root-saga'
+
+import LoggerMiddleware from '../utils/middleware/logger.middleware'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -24,7 +25,7 @@ const composedEnhancers = composeEnhancer(applyMiddleware(...middlewares))
 
 export const store = createStore(rootReducer, undefined, composedEnhancers)
 
-sagaMiddleware.run(fetchCollectionsStart)
+sagaMiddleware.run(rootSaga)
 
 export const persistor = persistStore(store)
 

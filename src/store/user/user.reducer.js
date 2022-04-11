@@ -1,20 +1,30 @@
-import type from './user.types';
+import types from './user.types'
 
 const initialState = {
 	currentUser: null,
-};
+	isLoading: false,
+}
 
 const userReducer = (state = initialState, action) => {
-	switch (action.type) {
-		case type.SET_CURRENT_USER:
+	const { type, payload } = action
+
+	switch (type) {
+		case types.FETCH_CURRENT_USER: {
 			return {
 				...state,
-				currentUser: action.payload,
-			};
+				isLoading: true,
+			}
+		}
+		case types.SET_CURRENT_USER:
+			return {
+				...state,
+				currentUser: payload,
+				isLoading: false,
+			}
 
 		default:
-			return state;
+			return state
 	}
-};
+}
 
-export default userReducer;
+export default userReducer
