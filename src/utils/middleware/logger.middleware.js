@@ -1,7 +1,7 @@
 const loggerMiddleware = store => next => action => {
 	const { type, payload } = action
 
-	//if not have type
+	//if not have type for redux thunk
 	if (!type) {
 		return next(action)
 	}

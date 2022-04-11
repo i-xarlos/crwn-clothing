@@ -1,6 +1,7 @@
 const UserTypes = {
+	FETCH_CURRENT_USER: 'USER/FETCH_CURRENT_USER',
 	SET_CURRENT_USER: 'USER/SET_CURRENT_USER',
 	UPDATE_CURRENT_USER: 'USER/UPDATE_CURRENT_USER',
-};
+}
 
-export default UserTypes;
+export default UserTypes
