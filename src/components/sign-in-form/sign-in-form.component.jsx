@@ -1,62 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FormInput from '../form-input/form-input.component'
 import Button, { BUTTON_TYPE_CLASES } from '../button/button.component'
 
+import { useDispatch } from 'react-redux'
 import {
-  createUserDocumentFromAuth,
-  signInWithEmailAndPasswordFromAuth,
-  signInWithGooglePopup,
-} from '../../utils/firebase/firebase.utils'
+  emailSignInStart,
+  googleSignInStart,
+} from '../../store/user/user.actions'
 
 import './sign-in-form.styles.scss'
 
 const defaultFormFields = {
   email: '',
   password: '',
-  message: '',
 }
 
 const SignInForm = () => {
   const [state, setState] = useState({ ...defaultFormFields })
+  const dispatch = useDispatch()
 
-  const { email, password, message } = state
+  const { email, password } = state
+
+  const resetFormFields = () => {
+    setState(defaultFormFields)
+  }
 
   const handleSubmit = async e => {
     e.preventDefault()
 
-    try {
-      //const { user } = await signInWithEmailAndPasswordFromAuth(email, password)
-      await signInWithEmailAndPasswordFromAuth(email, password)
-      //const dataUser = await getSignInUserFromAuth(user)
-
-      //console.log('user', user, dataUser)
-      setState({ ...defaultFormFields })
-      //setCurrentUser({ ...user, displayName: dataUser.displayName.stringValue })
-    } catch (e) {
-      let message = ''
-
-      switch (e.code) {
-        case 'auth/wrong-password':
-          message = 'Incorrect password for email'
-          break
-        case 'auth/user-not-found':
-          message = 'No user associated with this email'
-          break
-        default:
-          message = e.message
-      }
-
-      setState({ ...state, message })
-    }
+    dispatch(emailSignInStart(email, password))
+    resetFormFields()
   }
 
   const signInWidthGoogle = async () => {
-    try {
-      const { user } = await signInWithGooglePopup()
-      await createUserDocumentFromAuth(user)
-    } catch (e) {
-      setState({ ...state, message: e.message })
-    }
+    dispatch(googleSignInStart())
   }
 
   const handleChange = e => {
@@ -86,8 +63,6 @@ const SignInForm = () => {
           label='password'
           required
         />
-
-        {message && <span className='message'>* {message}</span>}
 
         <footer className='buttons'>
           <Button buttonType={BUTTON_TYPE_CLASES.base} type='submit'>

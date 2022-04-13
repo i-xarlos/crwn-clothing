@@ -11,6 +11,16 @@ export const HeaderContainer = styled.div`
   z-index: 1;
 `
 
+export const MessageBox = styled.span`
+  display: block;
+  font-size: 1.1rem;
+  color: white;
+  text-align: center;
+  background: green;
+  padding: 1rem 0;
+  ${({ error }) => error && `background-color:red;`}
+`
+
 export const LogoContainer = styled(Link)`
   height: 100%;
   display: flex;

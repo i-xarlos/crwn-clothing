@@ -1,10 +1,11 @@
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
-import { signOutUser } from '../../utils/firebase/firebase.utils'
 
 import { Outlet } from 'react-router-dom'
 import Logo from '../../assets/images/logo.gif'
+import { useNavigate } from 'react-router-dom'
 
 import {
   HeaderContainer,
@@ -12,20 +13,57 @@ import {
   OptionsContainer,
   OptionLink,
   Container,
+  MessageBox,
 } from './navigation.styles'
 
-function Navigation() {
-  const {
-    user: { currentUser },
-    cart: { hidden },
-  } = useSelector(state => state)
+import {
+  selectCurrentUser,
+  selectCurrentUserMessage,
+  selectCurrentUserError,
+} from '../../store/user/user.selectors'
 
-  const handleSignOut = async () => {
-    await signOutUser()
+import { selectCartHidden } from '../../store/cart/cart.selectors'
+import { signOutUser } from '../../store/user/user.actions'
+
+function Navigation() {
+  const [toggleMessage, setToggleMessage] = useState(false)
+  const currentUser = useSelector(selectCurrentUser)
+  const hidden = useSelector(selectCartHidden)
+  const message = useSelector(selectCurrentUserMessage)
+  const error = useSelector(selectCurrentUserError)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (message.includes('successfully')) {
+      setTimeout(() => {
+        navigate('/')
+      }, 1000)
+    }
+    if (message || error.message) showHideMessage()
+  }, [message, error, navigate])
+
+  const showHideMessage = () => {
+    setToggleMessage(true)
+    setTimeout(() => {
+      setToggleMessage(false)
+    }, 5000)
   }
+
+  const handleSignOut = () => {
+    dispatch(signOutUser())
+  }
+
+  const hasError = error.message ? true : false
 
   return (
     <Container>
+      {(message || error.message) && toggleMessage && (
+        <MessageBox error={hasError}>
+          {hasError ? '**' : ''} {message || error.message}
+        </MessageBox>
+      )}
       <HeaderContainer className='navigation' alt='Header'>
         <LogoContainer to='/'>
           <img src={Logo} alt='Ixarlos / store' /> <span>[ STORE ]</span>

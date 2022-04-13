@@ -1,24 +1,29 @@
-import { useState } from 'react'
-import { createUserWithEmailAndPasswordFromAuth } from '../../utils/firebase/firebase.utils'
+import { useState, useEffect } from 'react'
 
 import FormInput from '../form-input/form-input.component'
 import Button from '../button/button.component'
 import './sign-up-form.styles.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { emailSignUp } from '../../store/user/user.actions'
 
 const defaultFormFields = {
   displayName: '',
   email: '',
   password: '',
   confirmPassword: '',
-  message: '',
 }
 
 const SignUpForm = () => {
   const [state, setState] = useState({
     ...defaultFormFields,
   })
+  const dispatch = useDispatch()
 
-  const { displayName, email, password, confirmPassword, message } = state
+  const { displayName, email, password, confirmPassword } = state
+
+  const resetFormFields = () => {
+    setState(defaultFormFields)
+  }
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -28,24 +33,13 @@ const SignUpForm = () => {
       return
     }
 
-    try {
-      //const { user } = await createUserWithEmailAndPasswordFromAuth(
-      await createUserWithEmailAndPasswordFromAuth(email, password)
+    dispatch(emailSignUp(email, password, displayName))
+    resetFormFields()
 
-      setState({
-        ...defaultFormFields,
-        message: 'User has been created',
-      })
-    } catch (e) {
-      if (e.code === 'auth/email-already-in-use') {
-        return setState({
-          ...state,
-          message: 'Cannot create user, email already in use ',
-        })
-      }
-      console.error('User creation encountered an error: ', e)
-      setState({ ...state, message: e.message })
-    }
+    //setState({
+    //...defaultFormFields,
+    //message: 'User has been created',
+    //})
   }
 
   const handleChange = e => {
@@ -91,7 +85,6 @@ const SignUpForm = () => {
           label='confirmPassword'
           required
         />
-        {message && <span className='message'>* {message}</span>}
         <Button type='submit'>Sign up</Button>
       </form>
     </div>
