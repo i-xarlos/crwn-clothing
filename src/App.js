@@ -7,12 +7,7 @@ import Navigation from './routes/navigation/navigation.component'
 import Authentication from './routes/authentication/authentication.component'
 import CheckoutPage from './routes/checkout/checkout.component'
 
-import {
-	createUserDocumentFromAuth,
-	getSignInUserFromAuth,
-	onAuthStateChangedListener,
-} from './utils/firebase/firebase.utils'
-import { setCurrentUser } from './store/user/user.actions'
+import { checkUserSession } from './store/user/user.actions'
 import { useDispatch } from 'react-redux'
 
 import './App.css'
@@ -21,16 +16,8 @@ const App = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		const unsubscribeFromAuth = onAuthStateChangedListener(async user => {
-			if (user) {
-				createUserDocumentFromAuth(user)
-				const dataUser = await getSignInUserFromAuth(user)
-				if (dataUser) user.displayName = dataUser.displayName.stringValue
-			}
-			dispatch(setCurrentUser(user))
-		})
-		return unsubscribeFromAuth
-	}, [dispatch])
+		dispatch(checkUserSession())
+	}, [])
 
 	return (
 		<Routes>

@@ -29,12 +29,7 @@ export const selectCollection = collectionUrlParam => {
 	)
 }
 
-export const selectIsCollectionFetching = createSelector(
+export const selectIsCollectionLoading = createSelector(
 	[selectProduct],
-	product => product.isFetching
-)
-
-export const selectIsCollectionLoaded = createSelector(
-	[selectProduct],
-	product => !!product.collections
+	product => product.isLoading
 )

@@ -27,6 +27,7 @@ const firebaseApp = initializeApp(firebaseConfig)
 const googleProvider = new GoogleAuthProvider()
 googleProvider.setCustomParameters({ prompt: 'select_account' })
 
+export const db = getFirestore()
 export const auth = getAuth()
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect = () =>
@@ -58,7 +59,6 @@ export const signInWithEmailAndPasswordFromAuth = async (email, password) => {
 	if (!email || !password) return
 	return await signInWithEmailAndPassword(auth, email, password)
 }
-export const db = getFirestore()
 
 export const createUserDocumentFromAuth = async (
 	userAuth,
@@ -72,20 +72,23 @@ export const createUserDocumentFromAuth = async (
 	if (!userSnapShot.exists()) {
 		const { displayName, email } = userAuth
 		const createAt = new Date()
+		const userData = {
+			displayName,
+			email,
+			createAt,
+			...additionalData,
+		}
 
 		try {
 			await setDoc(userDocRef, {
-				displayName,
-				email,
-				createAt,
-				...additionalData,
+				...userData,
 			})
 		} catch (error) {
 			console.error('Error creating user', error.message)
 		}
 	}
 
-	return userDocRef
+	return userSnapShot
 }
 
 export const addCollectionsAndDocuments = async (
@@ -156,6 +159,19 @@ export const convertCollectionsSnapshotToMap = collections => {
 		acc[collection.title.toLowerCase()] = collection
 		return acc
 	}, {})
+}
+
+export const getCurrentUser = () => {
+	return new Promise((resolve, reject) => {
+		const unsubscribe = onAuthStateChanged(
+			auth,
+			userAuth => {
+				unsubscribe()
+				resolve(userAuth)
+			},
+			reject
+		)
+	})
 }
 
 export default firebaseApp
