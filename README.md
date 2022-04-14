@@ -223,6 +223,19 @@ The topics covered will be:
 ![Redux Sagas](/src/assets/readme-guide/redux-saga-flow.png "Redux Sagas")
 
 4. Redux Sagas Flow
+<<<<<<< HEAD
+
+    - First go to the middlewares and reducers
+    - Return to sagas and apply the changes
+
+
+![Redux Sagas Flow](/src/assets/readme-guide/Redux-Saga.png "Redux Sagas Flow")
+
+5. Stripe Payment 
+
+![Stripe](/src/assets/readme-guide/stripe.png "Stripe")
+=======
+>>>>>>> edaf20d91aae95af9e5674d9c01a19c93cd1b78d
 
     - First go to the middlewares and reducers
     - Return to sagas and apply the changes
