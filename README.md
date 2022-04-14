@@ -15,6 +15,21 @@ Thank for my teachers great and hard work.
 
 [@Xarlos_](https://twitter.com/Xarlos_) / [Carlos Gil Carrillo &#60;ixarlos/&#62;](https://ixarlos.com/)
 
+## INSTALLED AND DEPLOYED ON [NETLIFY](https://master--stellular-cheesecake-c2e6c6.netlify.app)
+Payment is only in avaible on Netlify
+
+- Install in the project `yarn add stripe dotenv @stripe/react-stripe-js @stripe/stripe-js`
+
+- Install NETLIFY CLI: `npm install -g netlify-cli`
+
+- Use command line: `netlify`
+
+- Connect your account: `netlify login`
+
+- Run dev server simulating netlify: `netlify dev`
+
+- NETLIFY folder is added and deployed in one instance of NODE.JS `netlify/functions/create-payment-intent.js`
+
 ## INSTALLED AND DEPLOYED ON [HEROKU](https://crwn-ixarlos.herokuapp.com)
 
 This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) and deployed on heroku.com
@@ -51,15 +66,25 @@ This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) a
 
 ### TIPS & INFO
 
-#### .ENV
+#### .ENV.DEVELOPMENT
 
-- Setting environment variable and create .env file
+- Setting environment variable and create .env.development file
 
-  `PORT=8000`
+  ```` js
+  PORT=8080
+  REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_ynKoKVdO2LNdu6elM9ALASDASasdasdDbw00z4OqJ1lk
+  STRIPE_SECRET_KEY=sk_test_51DVfpMMX54S0dNtEP6nJWo000FdlCynRjXDF
+  ````
 
-- Type this on bash (command)
+#### .ENV.PRODUCTION
 
-  `$ export PORT=8000`
+- Setting environment variable and create .env.production file:
+
+  ```` js
+  PORT=80
+  REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_Hdu6elM9ALASDASasdasdDbw00z4OqJ1lk
+  STRIPE_SECRET_KEY=sk_test_81DVfpMMX54S0dNtEP6nJWo000FdlCynRjXDF
+  ````
 
 #### STRIPE [API](https://stripe.com)
 
@@ -69,7 +94,7 @@ Added payment method our app (Stripe)
 
 - Strpe Checkout for REACT ( Link: [http://react-stripe-checkout](https://github.com/azmenak/react-stripe-checkout) )
 
-#### FIREBASE
+#### FIREBASE (Will update)
 
 - QueryReference
 
@@ -175,11 +200,11 @@ The topics covered will be:
 
 - Redux Saga [ &#9989; ]
 
-- Asynchronous Redux
+- Asynchronous Redux [ &#9989; ]
 
-- React Hooks
+- React Hooks [ &#9989; ]
 
-- Context API
+- Context API [ &#9989; ]
 
 - React Suspense + React Lazy
 
@@ -205,7 +230,7 @@ The topics covered will be:
 
 - Persistance + Session Storage [ &#9989; ]
 
-- State NormalizationT
+- State Normalization
 
 
 ## Redux graphic guide
@@ -223,7 +248,6 @@ The topics covered will be:
 ![Redux Sagas](/src/assets/readme-guide/redux-saga-flow.png "Redux Sagas")
 
 4. Redux Sagas Flow
-<<<<<<< HEAD
 
     - First go to the middlewares and reducers
     - Return to sagas and apply the changes
@@ -231,18 +255,10 @@ The topics covered will be:
 
 ![Redux Sagas Flow](/src/assets/readme-guide/Redux-Saga.png "Redux Sagas Flow")
 
-5. Stripe Payment 
+5. Stripe Payment
 
 ![Stripe](/src/assets/readme-guide/stripe.png "Stripe")
-=======
->>>>>>> edaf20d91aae95af9e5674d9c01a19c93cd1b78d
-
-    - First go to the middlewares and reducers
-    - Return to sagas and apply the changes
 
 
-![Redux Sagas Flow](/src/assets/readme-guide/Redux-Saga.png "Redux Sagas Flow")
 
-5. Stripe Payment 
 
-![Stripe](/src/assets/readme-guide/stripe.png "Stripe")
