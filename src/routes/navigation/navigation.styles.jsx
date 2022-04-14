@@ -18,7 +18,13 @@ export const MessageBox = styled.span`
   text-align: center;
   background: green;
   padding: 1rem 0;
+  transition: 1s ease;
+
   ${({ error }) => error && `background-color:red;`}
+  ${({ showMessage }) =>
+    showMessage
+      ? `opacity:1; height: auto;`
+      : `opacity:0; height:0; padding: 0`}
 `
 
 export const LogoContainer = styled(Link)`
