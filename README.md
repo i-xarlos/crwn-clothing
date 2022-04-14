@@ -70,17 +70,21 @@ This project was uploaded to [crw-ixarlos](https://crwn-ixarlos.herokuapp.com) a
 
 - Setting environment variable and create .env.development file
 
-  `PORT=8080`
-  `REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_ynKoKVdO2LNdu6elM9ALASDASasdasdDbw00z4OqJ1lk`
-  `STRIPE_SECRET_KEY=sk_test_51DVfpMMX54S0dNtEP6nJWo000FdlCynRjXDF`
+  ```` js
+  PORT=8080
+  REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_ynKoKVdO2LNdu6elM9ALASDASasdasdDbw00z4OqJ1lk
+  STRIPE_SECRET_KEY=sk_test_51DVfpMMX54S0dNtEP6nJWo000FdlCynRjXDF
+  ````
 
 #### .ENV.PRODUCTION
 
-- Setting environment variable and create .env.production file
+- Setting environment variable and create .env.production file:
 
-  `PORT=80`
-  `REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_Hdu6elM9ALASDASasdasdDbw00z4OqJ1lk`
-  `STRIPE_SECRET_KEY=sk_test_81DVfpMMX54S0dNtEP6nJWo000FdlCynRjXDF`
+  ```` js
+  PORT=80
+  REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_Hdu6elM9ALASDASasdasdDbw00z4OqJ1lk
+  STRIPE_SECRET_KEY=sk_test_81DVfpMMX54S0dNtEP6nJWo000FdlCynRjXDF
+  ````
 
 #### STRIPE [API](https://stripe.com)
 
@@ -90,7 +94,7 @@ Added payment method our app (Stripe)
 
 - Strpe Checkout for REACT ( Link: [http://react-stripe-checkout](https://github.com/azmenak/react-stripe-checkout) )
 
-#### FIREBASE
+#### FIREBASE (Will update)
 
 - QueryReference
 
@@ -196,11 +200,11 @@ The topics covered will be:
 
 - Redux Saga [ &#9989; ]
 
-- Asynchronous Redux
+- Asynchronous Redux [ &#9989; ]
 
-- React Hooks
+- React Hooks [ &#9989; ]
 
-- Context API
+- Context API [ &#9989; ]
 
 - React Suspense + React Lazy
 
@@ -226,7 +230,7 @@ The topics covered will be:
 
 - Persistance + Session Storage [ &#9989; ]
 
-- State NormalizationT
+- State Normalization
 
 
 ## Redux graphic guide
@@ -254,5 +258,7 @@ The topics covered will be:
 5. Stripe Payment
 
 ![Stripe](/src/assets/readme-guide/stripe.png "Stripe")
+
+
 
 
