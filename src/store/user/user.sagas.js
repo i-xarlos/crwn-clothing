@@ -1,4 +1,4 @@
-import { takeLatest, put, all, call } from 'redux-saga/effects'
+import { takeLatest, put, all, call, delay } from 'redux-saga/effects'
 import types from './user.types'
 import { emailSignUpSuccess, signInFaild, signInSuccess } from './user.actions'
 import {
@@ -9,124 +9,112 @@ import {
 	signOutUser,
 	createUserWithEmailAndPasswordFromAuth,
 } from '../../utils/firebase/firebase.utils'
-import { resolvingErrorMessages } from '../../utils/sagas/sagas.utils'
+import { safe, resolvingErrorMessages } from '../../utils/sagas/sagas.utils'
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
-	try {
-		const userSnapShot = yield call(
-			createUserDocumentFromAuth,
-			userAuth,
-			additionalData
-		)
-		//console.log('getSnapshotFromUserAuth', userAuth, additionalData)
-		//console.log('userSnapShot', userSnapShot)
-		yield put(
-			signInSuccess({
-				id: userSnapShot.id,
-				...userSnapShot.data(),
-				...additionalData,
-			})
-		)
-		yield put({
-			type: types.SET_CURRENT_USER_MESSAGE,
-			payload: `Hello ${
-				additionalData?.displayName || userSnapShot?.data().displayName
-			}!, you have successfully logged in. Welcome to <ixarlos> [STORE]`,
+	const userSnapShot = yield call(
+		createUserDocumentFromAuth,
+		userAuth,
+		additionalData
+	)
+	yield put(
+		signInSuccess({
+			id: userSnapShot.id,
+			...userSnapShot.data(),
+			...additionalData,
 		})
-	} catch (err) {
-		yield put(signInFaild(resolvingErrorMessages(err)))
-	}
+	)
+	yield put({
+		type: types.SET_CURRENT_USER_MESSAGE,
+		payload: `Hello ${
+			additionalData?.displayName || userSnapShot?.data().displayName || 'USER'
+		}!, you have successfully logged in. Welcome to <ixarlos> [STORE]`,
+	})
+
+	yield delay(3000)
+
+	yield put({
+		type: types.SET_CURRENT_USER_MESSAGE,
+		payload: '',
+	})
 }
 
 export function* isUserAuthenticated() {
 	yield put({ type: types.FETCH_CURRENT_USER })
-	try {
-		const userAuth = yield call(getCurrentUser)
-		if (!userAuth) return
-		yield call(getSnapshotFromUserAuth, userAuth)
-	} catch (err) {
-		yield put(signInFaild(resolvingErrorMessages(err)))
-	}
+	const userAuth = yield call(getCurrentUser)
+	if (!userAuth) return
+	yield call(getSnapshotFromUserAuth, userAuth)
 }
 
 export function* signInWithGoogle() {
-	try {
-		const { user } = yield call(signInWithGooglePopup)
-		yield call(getSnapshotFromUserAuth, user)
-	} catch (err) {
-		yield put(signInFaild(resolvingErrorMessages(err)))
-	}
+	const { user } = yield call(signInWithGooglePopup)
+	yield call(getSnapshotFromUserAuth, user)
 }
 
 export function* signInWithEmail({ payload: { email, password } }) {
-	try {
-		const { user } = yield call(
-			signInWithEmailAndPasswordFromAuth,
-			email,
-			password
-		)
+	const { user } = yield call(
+		signInWithEmailAndPasswordFromAuth,
+		email,
+		password
+	)
 
-		yield call(getSnapshotFromUserAuth, user)
-	} catch (err) {
-		yield put(signInFaild(resolvingErrorMessages(err)))
-	}
+	yield call(getSnapshotFromUserAuth, user)
 }
 
 export function* createUserFromEmailAndPass({
 	payload: { email, password, displayName },
 }) {
-	try {
-		console.log('createUserFromEmailAndPass', email, password, displayName)
-		const { user } = yield call(
-			createUserWithEmailAndPasswordFromAuth,
-			email,
-			password
-		)
-		console.log('createUserFromEmailAndPass user', user)
-		yield put(emailSignUpSuccess(user, { displayName }))
-	} catch (err) {
-		yield put(signInFaild(resolvingErrorMessages(err)))
-	}
+	const { user } = yield call(
+		createUserWithEmailAndPasswordFromAuth,
+		email,
+		password
+	)
+	yield put(emailSignUpSuccess(user, { displayName }))
 }
 
 export function* signOut() {
-	try {
-		yield signOutUser()
-		put({ type: types.SIGN_OUT })
-	} catch (err) {
-		yield put(signInFaild(resolvingErrorMessages(err)))
-	}
+	yield signOutUser()
+	put({ type: types.SIGN_OUT })
 }
 
 export function* signInAfterSignUp({ payload: { user, additionalData } }) {
 	yield call(getSnapshotFromUserAuth, user, additionalData)
 }
 
+export function* onError(err) {
+	yield put(signInFaild(resolvingErrorMessages(err)))
+	yield delay(3000)
+	yield put(signInFaild({ message: '' }))
+}
+
 export function* onCreateUserWithEmailAndPass() {
 	yield takeLatest(
 		types.CREATE_USER_FROM_EMAIL_AND_PASSWORD,
-		createUserFromEmailAndPass
+		safe(onError, createUserFromEmailAndPass)
 	)
 }
 
 export function* onSignUpSuccess() {
-	yield takeLatest(types.EMAIL_PASS_SIGN_UP_SUCCESS, signInAfterSignUp)
+	yield takeLatest(
+		types.EMAIL_PASS_SIGN_UP_SUCCESS,
+		safe(onError, signInAfterSignUp)
+	)
 }
 
 export function* onGoogleSignInStart() {
-	yield takeLatest(types.GOOGLE_SIGN_IN_START, signInWithGoogle)
+	yield takeLatest(types.GOOGLE_SIGN_IN_START, safe(onError, signInWithGoogle))
 }
 
 export function* onEmailSignInstart() {
-	yield takeLatest(types.EMAIL_SIGN_IN_START, signInWithEmail)
+	yield takeLatest(types.EMAIL_SIGN_IN_START, safe(onError, signInWithEmail))
 }
 
 export function* onCheckUserSession() {
-	yield takeLatest(types.CHECK_USER_SESSION, isUserAuthenticated)
+	yield takeLatest(types.CHECK_USER_SESSION, safe(onError, isUserAuthenticated))
 }
 
 export function* onSignOut() {
-	yield takeLatest(types.SIGN_OUT, signOut)
+	yield takeLatest(types.SIGN_OUT, safe(onError, signOut))
 }
 
 export function* userSagas() {

@@ -1,3 +1,13 @@
+import { call } from 'redux-saga/effects'
+export const safe = (handler = null, saga, ...args) =>
+	function* (action) {
+		try {
+			yield call(saga, ...args, action)
+		} catch (err) {
+			yield call(handler, ...args, err)
+		}
+	}
+
 export const resolvingErrorMessages = err => {
 	let message = ''
 
