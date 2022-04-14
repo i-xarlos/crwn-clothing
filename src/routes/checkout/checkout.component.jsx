@@ -1,5 +1,5 @@
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
-import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
+import PaymentForm from '../../components/payment-form/payment-form.component'
 import { useSelector } from 'react-redux'
 import {
   selectCartItems,
@@ -36,15 +36,16 @@ function CheckoutPage() {
       ))}
 
       <footer className='footer'>
-        {price && <StripeCheckoutButton price={price} />}
         <span className='total'>${price}</span>
       </footer>
+
+      {price && <PaymentForm price={price} />}
 
       {price && (
         <div className='test-warning'>
           * Please use the following tes credit card for payments *
           <br />
-          4242 4242 4242 4242 - Exp: 01/21
+          4242 4242 4242 4242 - Exp: 01/29 code: 123 zip: 12345
         </div>
       )}
     </div>

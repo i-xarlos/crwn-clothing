@@ -243,6 +243,6 @@ The topics covered will be:
 
 ![Redux Sagas Flow](/src/assets/readme-guide/Redux-Saga.png "Redux Sagas Flow")
 
+5. Stripe Payment 
 
-
-
+![Stripe](/src/assets/readme-guide/stripe.png "Stripe")

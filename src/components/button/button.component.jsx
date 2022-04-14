@@ -4,6 +4,7 @@ import {
   InvertedButtonStyles,
   GoogleSignInStyles,
   GoogleSignInStylesRedirect,
+  LoadingSpinner,
 } from './button.styles'
 
 export const BUTTON_TYPE_CLASES = {
@@ -21,13 +22,11 @@ const getButton = (buttonType = BUTTON_TYPE_CLASES.base) =>
     [BUTTON_TYPE_CLASES.inverted]: InvertedButtonStyles,
   }[buttonType])
 
-const Button = ({ children, buttonType, ...props }) => {
+const Button = ({ children, isLoading = false, buttonType, ...props }) => {
   const CustomButton = getButton(buttonType)
-  //const ele = { al: 'al', rel: 'lola' }['rel']
-  //console.log('CustomButton', ele)
   return (
-    <CustomButton alt='CustomButton' {...props}>
-      {children}
+    <CustomButton alt='CustomButton' disabled={isLoading} {...props}>
+      {isLoading ? <LoadingSpinner /> : children}
     </CustomButton>
   )
 }
