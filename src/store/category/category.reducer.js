@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const categoryReducer = (state = initialState, action) => {
-	const { type, payload } = action
+	const { type } = action
 
 	switch (type) {
 		default:
