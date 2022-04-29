@@ -61,16 +61,16 @@ function Navigation() {
     <Container>
       <MessageBox
         error={hasError}
-        showMessage={(message || error.message) && toggleMessage}
+        showMessage={Boolean((message || error.message) && toggleMessage)}
       >
         {hasError ? '**' : ''} {message || error.message}
       </MessageBox>
-      <HeaderContainer className='navigation' alt='Header'>
+      <HeaderContainer className='navigation' title='Header'>
         <LogoContainer to='/'>
           <img src={Logo} alt='Ixarlos / store' /> <span>[ STORE ]</span>
         </LogoContainer>
 
-        <OptionsContainer alt='OpitionsContainer'>
+        <OptionsContainer title='OpitionsContainer'>
           <OptionLink to='/'>Home</OptionLink>
           <OptionLink to='/shop'>Shop</OptionLink>
 

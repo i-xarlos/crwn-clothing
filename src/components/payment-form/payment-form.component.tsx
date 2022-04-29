@@ -1,25 +1,35 @@
-import React, { useState } from 'react'
+import { FormEvent, useState, FC } from 'react'
 //import StripeCheckout from 'react-stripe-checkout'
 import { BUTTON_TYPE_CLASES } from '../button/button.component'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import Button from '../button/button.component'
 
-import { PaymentFormContainer, FormContainer } from './payment-form.style.js'
+import { PaymentFormContainer, FormContainer } from './payment-form.style'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '../../store/user/user.selectors'
+import { StripeCardElement } from '@stripe/stripe-js'
 
-const PaymentForm = ({ price }) => {
+type PaymentFormProps = {
+  price: number
+}
+
+const isValidCardElement = (
+  card: StripeCardElement | null
+): card is StripeCardElement => card !== null
+
+const PaymentForm: FC<PaymentFormProps> = ({ price }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [isProcessingPayment, setIsProcessingPayment] = useState(false)
 
   const currentUser = useSelector(selectCurrentUser)
 
-  const paymentHandler = async e => {
+  const paymentHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!stripe || !elements) return
     setIsProcessingPayment(true)
+
     const response = await fetch('/.netlify/functions/create-payment-intent', {
       method: 'post',
       headers: {
@@ -32,18 +42,24 @@ const PaymentForm = ({ price }) => {
       paymentIntent: { client_secret },
     } = response
 
-    const paymentResult = await stripe.confirmCardPayment(client_secret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: currentUser?.displayName || 'Guest',
-      },
-    })
-    setIsProcessingPayment(false)
-    if (paymentResult.error) {
-      alert(paymentResult.error.message)
-    } else {
-      if (paymentResult.paymentIntent.status === 'succeeded') {
-        alert('Payment successfully!')
+    const card = elements.getElement(CardElement)
+
+    if (isValidCardElement(card)) {
+      const paymentResult = await stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card,
+          billing_details: {
+            name: currentUser?.displayName || 'Guest',
+          },
+        },
+      })
+      setIsProcessingPayment(false)
+      if (paymentResult.error) {
+        alert(paymentResult.error.message)
+      } else {
+        if (paymentResult.paymentIntent.status === 'succeeded') {
+          alert('Payment successfully!')
+        }
       }
     }
   }
@@ -62,28 +78,6 @@ const PaymentForm = ({ price }) => {
       </FormContainer>
     </PaymentFormContainer>
   )
-  //const priceForStripe = price * 100
-  //const publishableKey = 'pk_test_ynKoKVdO2LNdu6elM9AL5rbw00z4OqJ1lk'
-  //const onToken = token => {
-  //console.log(token)
-  //alert('Payment successfully')
-  //}
-  //return (
-  //<div className='stripe-checkout-button'>
-  //<StripeCheckout
-  //name={'</ixarlos>'}
-  //label='Payment'
-  //billingAddress
-  //shippingAddress
-  //image='https://sendeyo.com/up/d/f3eb2117da'
-  //description={`Your total is $${price}`}
-  //amount={priceForStripe}
-  //panelLabel={'Pay now'}
-  //token={onToken}
-  //stripeKey={publishableKey}
-  ///>
-  //</div>
-  //)
 }
 
 export default PaymentForm

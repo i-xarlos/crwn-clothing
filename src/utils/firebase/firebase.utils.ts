@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { AuthError, AuthErrorCodes } from 'firebase/auth'
 import {
   getFirestore,
   doc,
@@ -133,13 +134,14 @@ export const addCollectionsAndDocuments = async <T extends ObjectToAdd>(
 }
 
 export const getCollectionAndDocuments = async (
-  collectionName = 'collection'
-) => {
+  collectionName: string = 'collection'
+): Promise<Product[]> => {
+  //
   const collectionRef = collection(db, collectionName)
   const q = query(collectionRef)
 
   const querySnapshot = await getDocs(q)
-  return querySnapshot.docs.map(docSnapshot => docSnapshot.data())
+  return querySnapshot.docs.map(docSnapshot => docSnapshot.data() as Product)
 }
 
 export const convertCollectionSnapshotToMap = (collection: any) => {
@@ -196,6 +198,32 @@ export const getCurrentUser = (): Promise<User | null> => {
       reject
     )
   })
+}
+
+export const resolvingErrorMessages = (err: AuthError) => {
+  let message = ''
+
+  switch (err.code) {
+    case 'auth/popup-closed-by-user':
+    case AuthErrorCodes.POPUP_CLOSED_BY_USER:
+      message = 'Pop up closed by user'
+      break
+    case 'auth/email-already-in-use':
+    case AuthErrorCodes.EMAIL_EXISTS:
+      message = 'Cannot create user, email already in use'
+      break
+    case 'auth/wrong-password':
+    case AuthErrorCodes.INVALID_PASSWORD:
+      message = 'Incorrect password for email'
+      break
+    case 'auth/user-not-found':
+    case AuthErrorCodes.USER_DELETED:
+      message = 'No user associated with this email'
+      break
+    default:
+      message = err.message
+  }
+  return { ...err, message } as AuthError
 }
 
 export default firebaseApp

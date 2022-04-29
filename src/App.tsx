@@ -13,22 +13,22 @@ import { useDispatch } from 'react-redux'
 import './App.css'
 
 const App = () => {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-	useEffect(() => {
-		dispatch(checkUserSession())
-	}, [])
+  useEffect(() => {
+    dispatch(checkUserSession())
+  }, [dispatch])
 
-	return (
-		<Routes>
-			<Route path='/' element={<Navigation />}>
-				<Route index element={<HomePage />} />
-				<Route path='shop/*' element={<ShopPage />} />
-				<Route path='checkout' element={<CheckoutPage />} />
-				<Route exact path='auth' element={<Authentication />} />
-			</Route>
-		</Routes>
-	)
+  return (
+    <Routes>
+      <Route path='/' element={<Navigation />}>
+        <Route index element={<HomePage />} />
+        <Route path='shop/*' element={<ShopPage />} />
+        <Route path='checkout' element={<CheckoutPage />} />
+        <Route path='auth' element={<Authentication />} />
+      </Route>
+    </Routes>
+  )
 }
 
 export default App

@@ -11,7 +11,12 @@ export const HeaderContainer = styled.div`
   z-index: 1;
 `
 
-export const MessageBox = styled.span`
+type MessageBoxProps = {
+  error: boolean
+  showMessage: boolean
+}
+
+export const MessageBox = styled.span<MessageBoxProps>`
   display: block;
   font-size: 1.1rem;
   color: white;

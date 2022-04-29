@@ -12,7 +12,10 @@ function CartIcon() {
   const dispatch = useDispatch()
 
   return (
-    <CartContainer alt='CartIcon' onClick={() => dispatch(toggleCartHidden())}>
+    <CartContainer
+      title='CartIcon'
+      onClick={() => dispatch(toggleCartHidden())}
+    >
       <ShoppingIcon />
       <ItemCountContainer>{total}</ItemCountContainer>
     </CartContainer>

@@ -4,9 +4,15 @@ import { useSelector } from 'react-redux'
 import { selectCollection } from '../../store/product/product.selector'
 import './category.styles.scss'
 
-function Category() {
-  const { category } = useParams()
-  //console.log('reder/re-rendering category component')
+type CategoryRouteParams = {
+  category: string
+}
+
+function CategoryPage() {
+  const { category } = useParams<
+    keyof CategoryRouteParams
+  >() as CategoryRouteParams
+
   const products = useSelector(selectCollection(category))
 
   return (
@@ -28,4 +34,4 @@ function Category() {
   )
 }
 
-export default Category
+export default CategoryPage

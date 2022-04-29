@@ -1,3 +1,4 @@
+import { User } from 'firebase/auth'
 import { AdditionalData, UserData } from '../../utils/firebase/firebase.utils'
 import {
   Action,
@@ -26,7 +27,7 @@ export type EmailSignUp = ActionWithPayload<
 >
 export type EmailSignUpSuccess = ActionWithPayload<
   types.EMAIL_PASS_SIGN_UP_SUCCESS,
-  { user: UserData; additionalData: AdditionalData }
+  { user: User; additionalData: AdditionalData }
 >
 export type SignInSuccess = ActionWithPayload<types.SIGN_IN_SUCCESS, UserData>
 
@@ -72,7 +73,7 @@ export const emailSignUp = withMatcher(
 )
 
 export const emailSignUpSuccess = withMatcher(
-  (user: UserData, additionalData: AdditionalData): EmailSignUpSuccess =>
+  (user: User, additionalData: AdditionalData): EmailSignUpSuccess =>
     createAction(types.EMAIL_PASS_SIGN_UP_SUCCESS, {
       user,
       additionalData,
@@ -80,7 +81,8 @@ export const emailSignUpSuccess = withMatcher(
 )
 
 export const signInSuccess = withMatcher(
-  (user: UserData): SignInSuccess => createAction(types.SIGN_IN_SUCCESS, user)
+  (user: UserData & { id: string }): SignInSuccess =>
+    createAction(types.SIGN_IN_SUCCESS, user)
 )
 
 export const signInFaild = withMatcher(

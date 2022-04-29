@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, FormEvent, ChangeEvent } from 'react'
 import FormInput from '../form-input/form-input.component'
 import Button, { BUTTON_TYPE_CLASES } from '../button/button.component'
 
@@ -25,7 +25,7 @@ const SignInForm = () => {
     setState(defaultFormFields)
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     dispatch(emailSignInStart(email, password))
@@ -36,7 +36,7 @@ const SignInForm = () => {
     dispatch(googleSignInStart())
   }
 
-  const handleChange = e => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
     setState({ ...state, [name]: value })
   }
@@ -72,7 +72,6 @@ const SignInForm = () => {
             buttonType={BUTTON_TYPE_CLASES.google}
             type='button'
             onClick={signInWidthGoogle}
-            isGoogleSignIn
           >
             Sign In with Google
           </Button>

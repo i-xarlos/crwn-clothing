@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, FormEvent, ChangeEvent } from 'react'
 
 import FormInput from '../form-input/form-input.component'
 import Button from '../button/button.component'
 import './sign-up-form.styles.scss'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { emailSignUp } from '../../store/user/user.actions'
 
 const defaultFormFields = {
@@ -25,7 +25,7 @@ const SignUpForm = () => {
     setState(defaultFormFields)
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
@@ -35,14 +35,9 @@ const SignUpForm = () => {
 
     dispatch(emailSignUp(email, password, displayName))
     resetFormFields()
-
-    //setState({
-    //...defaultFormFields,
-    //message: 'User has been created',
-    //})
   }
 
-  const handleChange = e => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setState({ ...state, [name]: value })
   }
