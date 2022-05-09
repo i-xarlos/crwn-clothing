@@ -4,7 +4,7 @@ import { fetchCollectionsStart } from '../../store/product/product.actions'
 import { useDispatch } from 'react-redux'
 
 import Category from '../category/category.component'
-import CategoryPreview from '../../components/category-preview/category-preview.container'
+import CategoryPreview from '../../components/category-preview/category-preview.component'
 
 const ShopPage = () => {
   const dispatch = useDispatch()
@@ -21,4 +21,4 @@ const ShopPage = () => {
   )
 }
 
-export default ShopPage
+export default ShopPage
