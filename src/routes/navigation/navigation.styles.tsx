@@ -9,6 +9,10 @@ export const HeaderContainer = styled.div`
   margin: 25px 0;
   position: relative;
   z-index: 1;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 
 type MessageBoxProps = {
@@ -49,6 +53,11 @@ export const LogoContainer = styled(Link)`
     font-size: 0.8rem;
     margin-top: 0.35rem;
   }
+  @media screen and (max-width: 800px) {
+    span {
+      display: none;
+    }
+  }
 `
 
 export const OptionsContainer = styled.div`
@@ -57,6 +66,10 @@ export const OptionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 `
 
 export const OptionLink = styled(Link)`
@@ -67,9 +80,9 @@ export const OptionLink = styled(Link)`
   cursor: pointer;
   &:hover {
     color: orange;
-  }
-`
-
-export const Container = styled.div`
-  padding: 20px 40px;
-`
+  }
+`
+
+export const Container = styled.div`
+  padding: 20px 40px;
+`
